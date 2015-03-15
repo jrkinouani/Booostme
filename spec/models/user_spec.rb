@@ -32,5 +32,7 @@ describe User do
   it { should  respond_to(:description)}
   it { should_not validate_presence_of(:description)}
 
+  it { should have_many(:tasks)}
+
 
 end
