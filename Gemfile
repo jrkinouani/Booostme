@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'date_validator', '~> 0.7.1'
+gem 'devise'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -37,15 +38,11 @@ gem 'date_validator', '~> 0.7.1'
 # gem 'capistrano-rails', group: :development
 
 group :test do
-	gem 'faker'
-
-	gem 'rspec-rails'
-
-	gem "capybara" 
-
-	gem 'factory_girl_rails'
-
-	 gem 'shoulda-matchers', require: false
+  gem 'faker'
+  gem 'rspec-rails'
+  gem "capybara" 
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers', require: false
 end 
 
 
