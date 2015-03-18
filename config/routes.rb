@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  # get 'task/create'
+
+  # get 'task/new'
+
+  # get 'task/index'
+
+  # get 'task/show'
+
+  resources :task
+
   root 'welcome#index'
 
   devise_for :users, :controllers => {registrations: 'registrations'}
