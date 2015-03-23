@@ -13,7 +13,7 @@ describe 'UserRegistration' do
     page.should have_content 'Welcome'
   end
 
-  it 'should not allows user without First name' do 
+  it 'should not allows user to register without First name' do 
     visit new_user_registration_path
     fill_in 'Last name', :with => 'jouhri'
     fill_in 'Email', :with => 'dfsfdsfsdf'
@@ -23,7 +23,7 @@ describe 'UserRegistration' do
     page.should have_content("First name can't be blank")
   end
 
-  it 'should not allows user without Last name' do 
+  it 'should not allows user to register without Last name' do 
     visit new_user_registration_path
     fill_in 'First name', :with => 'jouhri'
     fill_in 'Email', :with => 'dfsfdsfsdf'
@@ -33,7 +33,7 @@ describe 'UserRegistration' do
     page.should have_content("Last name can't be blank")
   end
 
-  it 'should not allows user with invalid email' do 
+  it 'should not allows user to register with invalid email' do 
     visit new_user_registration_path
     fill_in 'First name', :with => 'oualid'
     fill_in 'Last name', :with => 'jouhri'
@@ -44,7 +44,7 @@ describe 'UserRegistration' do
     page.should have_content('Email is invalid')
   end
 
-  it "should not allows user with Password (8 characters minimum)" do 
+  it "should not allows user to register with Password (8 characters minimum)" do 
     visit new_user_registration_path
     fill_in 'First name', :with => 'oualid'
     fill_in 'Last name', :with => 'jouhri'
@@ -55,7 +55,7 @@ describe 'UserRegistration' do
     page.should have_content('Password is too short (minimum is 8 characters)')
   end
 
-  it "should not allows user without Password confirmation" do
+  it "should not allows user to register without Password confirmation" do
     visit new_user_registration_path
     fill_in 'First name', :with => 'oualid'
     fill_in 'Last name', :with => 'jouhri'
@@ -65,7 +65,7 @@ describe 'UserRegistration' do
     page.should have_content("Password confirmation doesn't match")
   end
 
-  it "should not allows user when Password confirmation doesn't match" do 
+  it "should not allows user to register when Password confirmation doesn't match" do 
     visit new_user_registration_path
     fill_in 'First name', :with => 'oualid'
     fill_in 'Last name', :with => 'jouhri'

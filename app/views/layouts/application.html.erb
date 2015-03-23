@@ -8,14 +8,17 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+  <% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+  <% end -%>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
-<ul class="hmenu">
-  <%= render 'devise/shared/login_items' %>
-</ul>
+  <ul class="hmenu">
+    <%= render 'devise/shared/login_items' %>
+  </ul>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

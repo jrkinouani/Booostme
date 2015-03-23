@@ -6,4 +6,8 @@ FactoryGirl.define do
     user nil
   end
 
+  factory :invalid_task, parent: :task do |f|
+    f.title nil
+  end
+
 end
