@@ -1,5 +1,6 @@
 class TaskController < ApplicationController
   before_action :set_task, :only => [:show]
+  before_action :check_user
 
   def index
     @tasks = Task.all
@@ -17,6 +18,7 @@ class TaskController < ApplicationController
     @task.start_date = Date.today
     if @task.save
       flash[:notice] = "Task #{@task.title} succefully created"
+      current_user.tasks << @task
       redirect_to @task
     else
       flash[:error] = @task.errors.full_messages.join(", ")
@@ -25,6 +27,13 @@ class TaskController < ApplicationController
   end
 
   private
+
+  def check_user
+    if current_user.nil?
+      flash[:error] = "You need to login"
+      redirect_to new_user_session_path
+    end
+  end
 
   def set_task
     @task = Task.find(params[:id])

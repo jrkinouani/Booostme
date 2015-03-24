@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe TaskController, type: :controller do
 
+  before(:each) do 
+    login_user
+  end
+
   describe "GET #index" do
     it "populates an array of tasks" do 
       task = FactoryGirl.create(:task)
