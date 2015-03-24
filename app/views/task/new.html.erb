@@ -1,0 +1,18 @@
+<h2>NEW  TASK</h2>
+
+<%= form_for(@task, url: {action: "create"}) do |f| %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.text_field :end_date, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+<% end %>
