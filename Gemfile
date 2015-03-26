@@ -40,7 +40,7 @@ gem 'devise'
 group :test do
   gem 'faker'
   gem 'rspec-rails'
-  gem "capybara" 
+  gem "capybara"
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', require: false
 end 

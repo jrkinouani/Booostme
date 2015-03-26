@@ -8,7 +8,7 @@ describe 'UserSignin' do
     fill_in 'Email', :with => user.email
     fill_in 'Password', :with => user.password
     click_button 'Log in'
-    page.should have_content 'Welcome'
+    page.should have_content 'Signed in successfully'
   end
 
   it "should not allow user to sign in with invalid password" do 
