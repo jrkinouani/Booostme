@@ -8,12 +8,16 @@
   padding: 0;
   margin: 0;
 }
+.menu
+{
+	display: none;
+}
 .row
 {
 	margin-left: -0px;
 	margin-right: 0px;
 }
-	.logo
+.logo
 {
 	height: 400px;
 	width: 400px;
