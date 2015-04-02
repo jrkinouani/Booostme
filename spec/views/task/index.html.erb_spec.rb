@@ -7,12 +7,8 @@ RSpec.describe "task/index.html.erb", type: :view do
     render
   end
 
-  it "displays link to create task" do
-    rendered.should have_selector('a', :text => 'Create task')
-  end
-
   it "displays list of last task created" do
-    rendered.should have_selector('li h2', :text => @task.title)
-    rendered.should have_selector('li p', :text => @task.end_date)
+    rendered.should have_selector('div.col-xs-6.col-lg-4 h2', :text => @task.title)
+    rendered.should have_selector('div.col-xs-6.col-lg-4 p', :text => @task.end_date)
   end
 end

@@ -29,6 +29,7 @@ gem 'date_validator', '~> 0.7.1'
 gem 'devise'
 
 gem 'tweetstream'
+gem 'bootstrap-sass', '~>3.3.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

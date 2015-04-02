@@ -1,14 +1,23 @@
-<h2><%= @task.title %></h2>
-<h3><%= @task.time_before_end %></h3>
-<p>Due date <%= @task.end_date %></p>
-<p>Owner <%= @task.user.login %></p>
-<ul>
-  <% @task.boosts.each do |boost|%>
-    <li>
-      <h4><%= boost.content %></h4>
-      <%if boost.img %>
-        <%= image_tag(boost.img) %>
-      <%end%>
-    </li>
-  <% end %>
-</ul>
+<div class="row row-offcanvas row-offcanvas-right">
+  <div class="col-xs-12 col-sm-12">
+    <p class="pull-right visible-xs">
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <div class="jumbotron">
+      <h2><%= @task.title %></h2>
+      <h3><%= @task.time_before_end %></h3>
+      <p>Owner <%= @task.user.login %></p>
+      <p>Due date <%= @task.end_date%></p>
+    </div>
+    <div class="row">
+      <% @task.boosts.each do |boost|%>
+        <div class="col-xs-6 col-lg-4">
+          <h4><%= boost.content %></h4>
+          <%if boost.img %>
+            <%= image_tag(boost.img) %>
+          <%end%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

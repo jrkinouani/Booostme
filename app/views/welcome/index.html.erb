@@ -1,12 +1,22 @@
-<%= link_to "Create task",  new_task_path%>
-<ul>
-  <% @tasks.each do | task | %>
-    <li>
-      <h2><%= task.title %></h2>
-      <h3><%= task.time_before_end%></h3>
-      <p> Due date <%= task.end_date %></p>
-    </li>
-  <% end %>
-</ul>
 
-<%= link_to "All task",  task_index_path%>
+<div class="row row-offcanvas row-offcanvas-right">
+  <div class="col-xs-12 col-sm-12">
+    <p class="pull-right visible-xs">
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <div class="jumbotron">
+      <h1>Boostme</h1>
+      <p>Get support around the world for your daily challenges.</p>
+    </div>
+    <div class="row">
+      <% @tasks.each do | task | %>
+        <div class="col-xs-6 col-lg-4">
+          <h2><%= task.title %></h2>
+          <h3><%= task.time_before_end%></h3>
+          <p> Due date <%= task.end_date %></p>
+          <p><%= link_to "View details", task_path(task), :class => "btn btn-default", :role => "button" %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
