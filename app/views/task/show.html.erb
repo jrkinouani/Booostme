@@ -1,4 +1,14 @@
 <h2><%= @task.title %></h2>
 <h3><%= @task.time_before_end %></h3>
 <p>Due date <%= @task.end_date %></p>
-<p>Owner <%= @task.user.first_name %></p>
+<p>Owner <%= @task.user.login %></p>
+<ul>
+  <% @task.boosts.each do |boost|%>
+    <li>
+      <h4><%= boost.content %></h4>
+      <%if boost.img %>
+        <%= image_tag(boost.img) %>
+      <%end%>
+    </li>
+  <% end %>
+</ul>

@@ -23,13 +23,8 @@ RSpec.describe "devise/registrations/new.html.erb", type: :view do
   end
 
   it "display a field to enter a First name" do 
-    rendered.should have_selector("form[action='/users'] label", :text => "First name")
-    rendered.should have_selector("form[action='/users'] input#user_first_name")
-  end
-
-  it "display a field to enter a Last name" do 
-    rendered.should have_selector("form[action='/users'] label", :text => "Last name")
-    rendered.should have_selector("form[action='/users'] input#user_last_name")
+    rendered.should have_selector("form[action='/users'] label", :text => "Login")
+    rendered.should have_selector("form[action='/users'] input#user_login")
   end
 
   it "display a field to enter Password confirmation" do 

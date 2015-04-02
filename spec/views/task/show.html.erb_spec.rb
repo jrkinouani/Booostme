@@ -19,7 +19,7 @@ RSpec.describe "task/show.html.erb", type: :view do
   end
 
   it "display owner og the task" do
-    rendered.should have_selector('p', :text => "Owner #{@task.user.first_name}")
+    rendered.should have_selector('p', :text => "Owner #{@task.user.login}")
   end
 
 end

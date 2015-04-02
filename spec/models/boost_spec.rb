@@ -9,6 +9,9 @@ RSpec.describe Boost, type: :model do
 
   it {should respond_to(:content)}
   it {should  validate_length_of(:content).is_at_most(140)}
+
+  it {should respond_to(:img)}
+
   it {should belong_to(:task)}
 
 end
