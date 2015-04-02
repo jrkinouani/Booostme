@@ -1,3 +1,7 @@
+body
+{
+	height: 100%;
+}
 .coming_soon
 {
 	/*background-color: #36DDA0;*/height: 600px;
@@ -14,7 +18,7 @@
 }
 .row
 {
-	margin-left: -0px;
+	margin-left: 0px;
 	margin-right: 0px;
 }
 .logo
@@ -29,16 +33,82 @@
 	text-align: center;
 	font-weight: 300;
 }
-.links
+
+.linktwitter
 {
- position: absolute;
- bottom: 25px; 
- left: 0; 
- right: 0;
- color: white;	
- text-align: center;
+	color:#36DDA0;
+	font-weight:bold;
+	list-style: none;	
 }
-a 
+/* start section*/
+section
 {
-	color:#36DDA0
+	background-color:white;
+	width: 100%;	
+	padding-top: 60px;
+	padding-bottom: 60px;
 }
+aside
+{
+	background-color: #e4e2e2;	
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+.container
+{
+	margin: 0 auto;
+max-width: 960px;
+min-width: 300px;
+}
+.how
+{
+	margin-bottom: 50px;
+	
+}
+blockquote
+{
+	padding: 10px 20px;
+	margin: 0 0 20px;
+	font-size: 17.5px;
+	border-left: 0px solid #eee;
+}
+.number
+{
+	
+margin: 0 14px 0 0;
+background-color: black;
+width: 38px;
+height: 38px;
+font-size: 20px;
+font-weight: 600;
+color: white;
+line-height: 36px;
+text-align: center;
+-webkit-border-radius: 19px;
+-moz-border-radius: 19px;
+border-radius: 19px;
+}
+.about
+{
+	font-size: 20px;
+	text-align: left;
+	font-weight: normal;
+	font-family: 'museo_sans300', sans-serif;
+	font-weight: normal;
+	color: black;
+}
+#footer
+{
+text-align: center;
+left: 0;
+bottom: 0;
+width: 100%;
+height: 80px;
+background-color:#e4e2e2;
+padding-top: 2%;
+}
+span
+{
+	color: black;
+}
+/* end section*/
