@@ -13,8 +13,12 @@ RSpec.describe "welcome/index.html.erb", type: :view do
   end
 
   it "displays link to create task" do 
-    rendered.should have_selector('a',
-                                  :text => "Create task")
+    rendered.should have_selector('a', :text => "Create task")
+  end
+
+
+  it "displays link to index task" do 
+    rendered.should have_selector('a', :text => "All task")
   end
 
 end
