@@ -39,13 +39,13 @@ describe 'UserCreateTask' do
     it "should redirect to sign in page when user visit index task page" do 
       visit task_index_path
       page.should have_content("You need to login")
-      page.should have_content("Log in")
+      page.should have_content("Please sign in")
     end
 
     it "should redirect to sign in page when user visit new task page" do 
       visit new_task_path
       page.should have_content("You need to login")
-      page.should have_content("Log in")
+      page.should have_content("Please sign in")
     end
   end
 
