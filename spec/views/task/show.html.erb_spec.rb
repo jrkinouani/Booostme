@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "task/show.html.erb", type: :view do
   before(:each) do 
     @task = FactoryGirl.build(:task)
+    @boost = FactoryGirl.build(:boost)
     user = FactoryGirl.create(:user)
     user.tasks << @task
     assign :task, @task

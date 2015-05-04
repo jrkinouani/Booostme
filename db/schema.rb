@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20150402134035) do
 
   create_table "boosts", force: :cascade do |t|
     t.string   "content"
+    t.string   "text"
+    t.string   "type"
     t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

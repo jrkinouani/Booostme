@@ -48,4 +48,36 @@ RSpec.describe BoostController, type: :controller do
     end
   end
 
+  # describe "POST #text" do
+    # context "with valid attributes" do
+    #   it "saves the new text boost in the database" do 
+    #     boost_attr = FactoryGirl.attributes_for(:text_boost)
+    #     expect{
+    #       post :text, task: task_attr
+    #     }.to change(Boostt, :count).by(1)
+    #   end
+
+    #   it "redirect to the new task" do
+    #     task_attr = FactoryGirl.attributes_for(:task)
+    #     post :create, task: task_attr
+    #     response.should redirect_to Task.last
+    #   end
+    # end
+
+    # context "with invalide attributes" do
+    #   it "does not save new task in the database" do
+    #     task_attr = FactoryGirl.attributes_for(:invalid_task)
+    #     expect{
+    #       post :create, task: task_attr
+    #     }.to_not change(Task, :count)
+    #   end
+
+    #   it "re-renders the :new template" do 
+    #     task_attr = FactoryGirl.attributes_for(:invalid_task)
+    #     post :create, task: task_attr
+    #     response.should render_template :new
+    #   end
+    # end
+   #end
+
 end

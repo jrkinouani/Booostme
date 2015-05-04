@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :boost
-  resources :task
+  resources :task do
+    member do 
+      post 'text_boost' => "task#text_boost" 
+    end
+  end
 
   root 'welcome#index'
 
