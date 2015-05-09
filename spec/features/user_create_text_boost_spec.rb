@@ -17,11 +17,19 @@ describe "UserCreateTextBoost" do
     end
 
     it "should allow user to do an text boost" do 
-      fill_in "Type", :with => "TextBoost"
       fill_in "Text", :with => "hello boby keep going you can do it"
       click_button "send Boost"
       page.should have_content "your boost has been successfully sent"
+      page.should have_content "by #{user.login}"
     end
-
   end
+
+  context "user is not login" do 
+    it "should redirect to sign in page when user visit task show" do 
+      visit task_path(task.id)
+      page.should have_content("You need to login")
+      page.should have_content("Please sign in")
+    end
+  end
+
 end

@@ -18,6 +18,7 @@ class TaskController < ApplicationController
     @boost = Boost.create(boost_params)
     if @boost.save
       @task.boosts << @boost
+      current_user.boosts << @boost
       flash[:notice] = "your boost has been successfully sent"
     else
       flash[:error] = @task.errors  .full_messages.join(', ')

@@ -5,6 +5,7 @@ class CreateBoosts < ActiveRecord::Migration
       t.string :text
       t.string :type
       t.references :task, index: true
+      t.references :user, index: true
 
       t.timestamps null: false
     end
