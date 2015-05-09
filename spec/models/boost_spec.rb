@@ -13,5 +13,5 @@ RSpec.describe Boost, type: :model do
   it {should respond_to(:img)}
 
   it {should belong_to(:task)}
-
+  it {should belong_to(:user)}
 end

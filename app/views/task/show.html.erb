@@ -10,13 +10,60 @@
       <div class="clock" style="margin:2em;"></div>
       <div class="message"></div>
     </div>
+    <div class=row>
+
+      <h3>Boost him</h3>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="message">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                With message
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="message">
+            <div class="panel-body">
+              <%= form_for(@boost, url: text_boost_task_path(@task), html: {method: :post}) do |f|%>
+                <%= f.hidden_field :type, :value => "TextBoost" %>
+                <div class="field">
+                  <%= f.label :text %><br />
+                  <%= f.text_area :text, autofocus: true, size: "24x6" %>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit "send Boost", :class => "btn btn-lg btn-primary" %>
+                </div>
+              <%end%>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="photo">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                With photo
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
+            <div class="panel-body">
+              coming photo
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
+      <h3>List of boost</h3>
       <% @task.boosts.each do |boost|%>
         <div class="col-xs-6 col-lg-4">
           <h4><%= boost.content %></h4>
           <%if boost.img %>
             <%= image_tag(boost.img) %>
           <%end%>
+          <p>by <%= boost.user.login%></p>
         </div>
       <% end %>
     </div>

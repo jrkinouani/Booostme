@@ -15,13 +15,17 @@ ActiveRecord::Schema.define(version: 20150402134035) do
 
   create_table "boosts", force: :cascade do |t|
     t.string   "content"
+    t.string   "text"
+    t.string   "type"
     t.integer  "task_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "img"
   end
 
   add_index "boosts", ["task_id"], name: "index_boosts_on_task_id"
+  add_index "boosts", ["user_id"], name: "index_boosts_on_user_id"
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"

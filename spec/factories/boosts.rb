@@ -1,7 +1,17 @@
 FactoryGirl.define do
   factory :boost do
-    content {Faker::Hacker.say_something_smart}
+    content nil
     task nil
+  end
+
+  factory :boost_text, parent: :boost do |f|
+    f.text {Faker::Hacker.say_something_smart}
+    f.type "TextBoost"
+  end
+
+  factory :boost_text_invalid, parent: :boost do |f|
+    f.text nil
+    f.type "TextBoost"
   end
 
 end
