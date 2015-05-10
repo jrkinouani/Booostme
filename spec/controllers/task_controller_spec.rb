@@ -120,4 +120,45 @@ RSpec.describe TaskController, type: :controller do
     end
   end
 
+  describe "POST #picture_boost" do
+
+    context "with valid attributes" do
+      before :each do
+        @file = fixture_file_upload('spec/files/booostme_400vert.png', 'text/png')
+      end
+
+      it "saves the new picture in the database" do 
+        task = FactoryGirl.create(:task)
+        boost_attr = {image: @file, type: "PictureBoost"}
+        expect{
+          post :picture_boost, id: task.id, boost: boost_attr
+        }.to change(Boost, :count).by(1)
+      end
+
+      it "redirect to the new task" do
+        task = FactoryGirl.create(:task)
+        boost_attr = {image: @file, type: "PictureBoost"}
+        post :picture_boost, id: task.id, boost: boost_attr
+        response.should redirect_to Task.last
+      end
+    end
+
+    context "with invalide attributes" do
+      it "does not save new task in the database" do
+        task = FactoryGirl.create(:task)
+        boost_attr = FactoryGirl.attributes_for(:boost_picture_invalid)
+        expect{
+          post :picture_boost, id: task.id, boost: boost_attr
+        }.to_not change(Boost, :count)
+      end
+
+      it "re-renders the :new template" do 
+        task = FactoryGirl.create(:task)
+        boost_attr = FactoryGirl.attributes_for(:boost_text)
+        post :picture_boost, id: task.id, boost: boost_attr
+        response.should redirect_to Task.last
+      end
+    end
+  end  
+
 end

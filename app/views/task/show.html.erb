@@ -48,7 +48,16 @@
           </div>
           <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
             <div class="panel-body">
-              coming photo
+              <%= form_for(@boost, url: picture_boost_task_path(@task), html: {method: :post, multipart: true}) do |f|%>
+                <%= f.hidden_field :type, :value => "PictureBoost" %>
+                <div class="field">
+                  <%= f.file_field :image%>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit "send Picture", :class => "btn btn-lg btn-primary" %>
+                </div>
+              <%end%>
             </div>
           </div>
         </div>
@@ -59,11 +68,8 @@
       <h3>List of boost</h3>
       <% @task.boosts.each do |boost|%>
         <div class="col-xs-6 col-lg-4">
-          <h4><%= boost.content %></h4>
-          <%if boost.img %>
-            <%= image_tag(boost.img) %>
-          <%end%>
-          <p>by <%= boost.user.login%></p>
+        <%= boost.content.html_safe%>
+           <p>by <%= boost.user.login%></p>
         </div>
       <% end %>
     </div>

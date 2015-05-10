@@ -31,6 +31,11 @@ gem 'devise'
 gem 'tweetstream'
 gem 'bootstrap-sass', '~>3.3.4'
 
+
+gem 'carrierwave'
+gem 'fog'
+gem "fog-aws"
+gem "mini_magick"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

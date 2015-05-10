@@ -3,7 +3,7 @@ class TextBoost < Boost
 
 
   def content
-    text
+    "<h4>#{text}</h4>"
   end
 
 end
