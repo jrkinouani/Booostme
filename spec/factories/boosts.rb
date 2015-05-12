@@ -14,4 +14,9 @@ FactoryGirl.define do
     f.type "TextBoost"
   end
 
+  factory :boost_picture_invalid, parent: :boost do |f|
+    f.image nil
+    f.type "PictureBoost"
+  end
+
 end

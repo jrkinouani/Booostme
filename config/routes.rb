@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :boost
   resources :task do
     member do 
-      post 'text_boost' => "task#text_boost" 
+      post 'text_boost' => "task#text_boost"
+      post 'picture_boost' => "task#picture_boost" 
     end
   end
 

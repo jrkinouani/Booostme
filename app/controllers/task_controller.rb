@@ -1,5 +1,5 @@
 class TaskController < ApplicationController
-  before_action :set_task, :only => [:show, :text_boost]
+  before_action :set_task, :only => [:show, :text_boost, :picture_boost]
   before_action :check_user
 
   def index
@@ -21,7 +21,19 @@ class TaskController < ApplicationController
       current_user.boosts << @boost
       flash[:notice] = "your boost has been successfully sent"
     else
-      flash[:error] = @task.errors  .full_messages.join(', ')
+      flash[:error] = @boost.errors.full_messages.join(', ')
+    end
+    redirect_to @task
+  end
+
+  def picture_boost
+    @boost = Boost.create(boost_params)
+    if @boost.save
+      @task.boosts << @boost
+      current_user.boosts << @boost
+      flash[:notice] = "your boost has been successfully sent"
+    else
+      flash[:error] = @boost.errors.full_messages.join(', ')
     end
     redirect_to @task
   end
@@ -57,7 +69,7 @@ class TaskController < ApplicationController
   end
 
   def boost_params
-    params.require("boost").permit(:content, :text, :type)
+    params.require("boost").permit(:content, :text, :type, :image)
   end
 
 end
