@@ -8,10 +8,10 @@ RSpec.describe Boost, type: :model do
   subject {@boost}
 
   it {should respond_to(:content)}
-  it {should  validate_length_of(:content).is_at_most(140)}
+  it {should  validate_length_of(:text).is_at_most(140)}
 
-  it {should respond_to(:img)}
+  it {should respond_to(:image)}
 
   it {should belong_to(:task)}
-
+  it {should belong_to(:user)}
 end

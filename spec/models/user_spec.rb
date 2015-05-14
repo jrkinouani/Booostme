@@ -31,6 +31,7 @@ describe User do
   it { should_not validate_presence_of(:description)}
 
   it { should have_many(:tasks)}
+  it {should have_many(:boosts)}
 
 
 end
