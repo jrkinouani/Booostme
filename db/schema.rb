@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20150509142529) do
   create_table "boosts", force: :cascade do |t|
     t.string   "content"
     t.string   "text"
+    t.integer  "money"
     t.string   "type"
     t.integer  "task_id"
     t.integer  "user_id"

@@ -61,6 +61,57 @@
             </div>
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="photo">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                With money
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
+            <div class="panel-body">
+              <%= form_for(@boost, url: money_boost_task_path(@task), html: {method: :post, id: "payment-form"}) do |f|%>
+                <%= f.hidden_field :type, :value => "MoneyBoost" %>
+                <span class="payment-errors"></span>
+
+                <%= f.radio_button(:money, 100) %>
+                <%= label_tag(:one_dollar, "$1") %>
+                <%= f.radio_button(:money, 500) %>
+                <%= label_tag(:five_dollar, "$5") %>
+                <%= f.radio_button(:money, 1000) %>
+                <%= label_tag(:ten_dollar, "$10") %>
+
+                <div class="form-row">
+                  <label>
+                    <span>Card Number</span>
+                    <input type="text" size="20" data-stripe="number" id="card_number" />
+                  </label>
+                </div>
+
+                <div class="form-row">
+                  <label>
+                    <span>CVC</span>
+                    <input type="text" size="4" data-stripe="cvc" id="cvc"/>
+                  </label>
+                </div>
+
+                <div class="form-row">
+                  <label>
+                    <span>Expiration (MM/YYYY)</span>
+                    <input type="text" size="2" data-stripe="exp-month" id="exp-month"/>
+                  </label>
+                  <span> / </span>
+                  <input type="text" size="4" data-stripe="exp-year" id="exp-year" />
+                </div>
+
+                <div class="actions">
+                  <%= f.submit "send money", :class => "btn btn-lg btn-primary" %>
+                </div>
+              <%end%>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -75,6 +126,43 @@
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  // This identifies your website in the createToken call below
+  Stripe.setPublishableKey('pk_test_umZbkFDV0vblJJX97EuGm9Su');
+  // ...
+  jQuery(function($) {
+    $('#payment-form').submit(function(event) {
+      var $form = $(this);
+
+      // Disable the submit button to prevent repeated clicks
+      $form.find('button').prop('disabled', true);
+
+      Stripe.card.createToken($form, stripeResponseHandler);
+
+      // Prevent the form from submitting with the default action
+      return false;
+    });
+  });
+
+  function stripeResponseHandler(status, response) {
+    var $form = $('#payment-form');
+
+    if (response.error) {
+      // Show the errors on the form
+      $form.find('.payment-errors').text(response.error.message);
+      $form.find('button').prop('disabled', false);
+    } else {
+      // response contains id and card, which contains additional card details
+      var token = response.id;
+      // Insert the token into the form so it gets submitted to the server
+      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+      // and submit
+      $form.get(0).submit();
+    }
+  };
+</script>
 
 
 <script type="text/javascript">
