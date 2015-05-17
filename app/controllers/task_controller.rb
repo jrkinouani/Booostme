@@ -1,5 +1,5 @@
 class TaskController < ApplicationController
-  before_action :set_task, :only => [:show, :text_boost, :picture_boost]
+  before_action :set_task, :only => [:show, :text_boost, :picture_boost, :money_boost]
   before_action :check_user
 
   def index
@@ -38,6 +38,23 @@ class TaskController < ApplicationController
     redirect_to @task
   end
 
+  def money_boost
+    begin
+      StripeCard::charge_user(boost_params[:money], "eur", params[:stripeToken])
+      @boost = Boost.create(boost_params)
+      if @boost.save
+        @task.boosts << @boost
+        current_user.boosts << @boost
+        flash[:notice] = "your boost has been successfully sent"
+      else
+        flash[:error] = @boost.errors.full_messages.join(', ')
+      end
+    rescue Exception => e
+      flash[:notice] = e.message
+    end
+    redirect_to @task
+  end
+
   def create
     @task = Task.new(task_params)
     @task.start_date = Date.today
@@ -69,7 +86,7 @@ class TaskController < ApplicationController
   end
 
   def boost_params
-    params.require("boost").permit(:content, :text, :type, :image)
+    params.require("boost").permit(:content, :text, :type, :image, :money)
   end
 
 end

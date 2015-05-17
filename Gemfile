@@ -36,6 +36,8 @@ gem 'carrierwave'
 gem 'fog'
 gem "fog-aws"
 gem "mini_magick"
+gem 'stripe'
+gem 'stripe-ruby-mock'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

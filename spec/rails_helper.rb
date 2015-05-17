@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'shoulda/matchers'
 require 'devise'
+require 'stripe_mock'
 #require 'carrierwave/test/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 

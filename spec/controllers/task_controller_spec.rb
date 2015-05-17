@@ -144,7 +144,7 @@ RSpec.describe TaskController, type: :controller do
     end
 
     context "with invalide attributes" do
-      it "does not save new task in the database" do
+      it "does not save new picture boost in the database" do
         task = FactoryGirl.create(:task)
         boost_attr = FactoryGirl.attributes_for(:boost_picture_invalid)
         expect{
@@ -159,6 +159,61 @@ RSpec.describe TaskController, type: :controller do
         response.should redirect_to Task.last
       end
     end
-  end  
+  end
+
+
+  describe "POST #money_boost" do
+
+    context "with valid attributes" do
+
+      before(:each) do
+        card_data = { :number => "4242424242424242", :exp_month => 9, :exp_year => 2018, :cvc => "999" }
+        card = StripeMock::Util.card_merge(card_data, {})
+        card[:fingerprint] = StripeMock::Util.fingerprint(card[:number])
+
+        @stripe_token = Stripe::Token.create(:card => card)
+      end
+
+      it "saves the new money boost in the database" do 
+        task = FactoryGirl.create(:task)
+        boost_attr = FactoryGirl.attributes_for(:boost_money)
+        expect{
+          post :money_boost, id: task.id, boost: boost_attr, stripeToken: @stripe_token.id
+        }.to change(Boost, :count).by(1)
+      end
+
+      it "redirect to the new task" do
+        task = FactoryGirl.create(:task)
+        boost_attr = FactoryGirl.attributes_for(:boost_money)
+        post :money_boost, id: task.id, boost: boost_attr, stripeToken: @stripe_token.id
+        response.should redirect_to Task.last
+      end
+    end
+
+    context "with invalide attributes" do
+      before(:each) do
+        card_data = { :number => "4242424242424242", :exp_month => 9, :exp_year => 2018, :cvc => "999" }
+        card = StripeMock::Util.card_merge(card_data, {})
+        card[:fingerprint] = StripeMock::Util.fingerprint(card[:number])
+
+        @stripe_token = Stripe::Token.create(:card => card)
+      end
+
+      it "does not save new money boost in the database" do
+        task = FactoryGirl.create(:task)
+        boost_attr = FactoryGirl.attributes_for(:boost_picture_invalid)
+        expect{
+          post :money_boost, id: task.id, boost: boost_attr, stripeToken: @stripe_token.id
+        }.to_not change(Boost, :count)
+      end
+
+      it "re-renders the :new template" do 
+        task = FactoryGirl.create(:task)
+        boost_attr = FactoryGirl.attributes_for(:boost_text)
+        post :money_boost, id: task.id, boost: boost_attr, stripeToken: @stripe_token.id
+        response.should redirect_to Task.last
+      end
+    end
+  end
 
 end

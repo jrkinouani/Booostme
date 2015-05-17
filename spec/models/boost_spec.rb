@@ -12,6 +12,8 @@ RSpec.describe Boost, type: :model do
 
   it {should respond_to(:image)}
 
+  it {should respond_to(:money)}
+
   it {should belong_to(:task)}
   it {should belong_to(:user)}
 end

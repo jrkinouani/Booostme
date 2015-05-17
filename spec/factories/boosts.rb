@@ -19,4 +19,14 @@ FactoryGirl.define do
     f.type "PictureBoost"
   end
 
+  factory :boost_money, parent: :boost do |f|
+    f.money {[100, 500, 1000].sample}
+    f.type "MoneyBoost"
+  end
+
+  factory :boost_money_invalid, parent: :boost do |f|
+    f.money nil
+    f.type "MoneyBoost"
+  end
+
 end

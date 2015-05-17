@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do 
       post 'text_boost' => "task#text_boost"
       post 'picture_boost' => "task#picture_boost" 
+      post 'money_boost' => "task#money_boost"
     end
   end
 
