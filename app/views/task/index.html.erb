@@ -1,14 +1,16 @@
 <div class="row row-offcanvas row-offcanvas-right">
-  <div class="col-xs-12 col-sm-12">
-    <div class="row">
-      <% @tasks.each do | task | %>
-        <div class="col-xs-6 col-lg-4">
-          <h2><%= task.title %></h2>
-          <h3><%= task.time_before_end%></h3>
-          <p> Due date <%= task.end_date %></p>
-          <p><%= link_to "View details", task_path(task), :class => "btn btn-default", :role => "button" %></p>
-        </div>
-      <% end %>
+  <div class="container">
+    <div class="col-xs-12 col-sm-12">
+      <div class="row">
+        <% @tasks.each do | task | %>
+          <div class="col-xs-6 col-lg-4">
+            <h2><%= task.title %></h2>
+            <h3><%= task.time_before_end%></h3>
+            <p> Due date <%= task.end_date %></p>
+            <p><%= link_to "View details", task_path(task), :class => "btn btn-default", :role => "button" %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
