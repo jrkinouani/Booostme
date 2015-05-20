@@ -13,6 +13,11 @@ body
   margin: 0 auto;
 }
 
+.navbar-inverse .navbar-nav > li > a 
+{
+  	color: white;
+  	font-size:18px;
+}
 .logo
 {
 	height:80px;
@@ -24,14 +29,9 @@ body
 	border-color:transparent; 
 	height:80px
 }
-.navbar-inverse .navbar-nav > li > a {
-  color: white;
-  font-size: 18px;
-  font-weight:200	;
-}
 .linknav
 {
-	
+	color:white !important;
 	font-size:18px;
 }
 /*page index task*/
