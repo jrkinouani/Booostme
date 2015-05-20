@@ -12,12 +12,7 @@ body
   padding: 15px;
   margin: 0 auto;
 }
-a.navbar-brand
-{
-	font-family:Streetscript Redux;
-	color:white!important;
-	font-size:30px;
-}
+
 .logo
 {
 	height:80px;
@@ -29,9 +24,14 @@ a.navbar-brand
 	border-color:transparent; 
 	height:80px
 }
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+  font-size: 18px;
+  font-weight:200	;
+}
 .linknav
 {
-	color:white !important;
+	
 	font-size:18px;
 }
 /*page index task*/

@@ -16,9 +16,9 @@
     </div>
     <div class="row">
      <div class="container">
+       <h3>Featured</h3>
       <% @tasks.each do | task | %>
         <div class="col-xs-6 col-lg-4">
-           <h3>Featured</h3>
           <h2><%= task.title %></h2>
           <p> Due date <%= task.end_date %></p>
           <div class="countdown">
