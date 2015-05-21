@@ -2,6 +2,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 body
 {
     padding-top: 0px;
@@ -25,9 +26,18 @@ body
 }
 .navbar-inverse
 {
-	background-color: transparent;
+	background-color: #36538C;
 	border-color:transparent; 
 	height:80px
+}
+.pull-left 
+{
+   float: left !important;
+   margin-top: 10px;
+}
+.pull-right
+{
+	margin-top:10px;
 }
 .linknav
 {
@@ -57,4 +67,23 @@ body
 {
 	height:250px;
 	widht:250px;
+}
+/*page task new*/
+
+.container.task
+{
+	margin-top:100px;
+	background-color:transparent!important;
+}
+.form-signin
+{
+	margin-top:50px;
+}
+.form-signin.task
+{
+	margin-top: 5px;
+}
+.title_task
+{
+	text-align:center;
 }
