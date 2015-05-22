@@ -6,13 +6,13 @@
       </p>
       <div class="jumbotron">
         <h2><%= @task.title %></h2>
-        <p>Owner <%= @task.user.login %></p>
+        <p>By <%= @task.user.login %></p>
         <p>Due date <%= @task.end_date%></p>
         <div class="clock" style="margin:2em;"></div>
         <div class="message"></div>
       </div>
       <div class="row">
-        <h3>Boost him with :</h3>
+        <h3>Boost <%= @task.user.login %> with :</h3>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="col-sm-3">
             <div class="panel panel-default">
