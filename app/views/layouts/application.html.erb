@@ -9,7 +9,7 @@
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
 </head>
-<body cz-shortcut-listen="true">
+<bo<dy cz-shortcut-listen="true">
 
 
   <nav class="navbar navbar-fixed-top navbar-inverse">
@@ -45,11 +45,22 @@
     <% end -%>
 
     <%= yield %>
-  <div class="container">  
-    <footer>
-        <p>© Company 2014</p>
-        
+
+  <div class="container">
+    <footer>  
+      <ul class="dsg-landing-list">
+      <li>
+        <%= link_to "About", about_path %>
+      </li>
+      <li>
+        <%= link_to "Terms", terms_path %>
+      </li>
+      <li>
+        ©Booostme 2015
+      </li>
+    </ul>
     </footer>
+
   </div>
 
 </body>

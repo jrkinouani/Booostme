@@ -7,7 +7,7 @@
     <div class="menu_content">
       <div class="container">
         <div class="col-xs-12 col-sm-12 punchline">
-          <%= image_tag("booostme_500vert.png", :class => "logo_content hidden-phone-xs") %>
+          <%= image_tag("booostme_500vert.png", :class => "logo_content hidden-phone") %>
           <h2>Challenge yourself and be boosted <br> by the people around the world</h2>
         </div>
       </div>
@@ -15,7 +15,7 @@
       <p>Get support around the world for your daily challenges.</p>-->
     </div>
     <div class="row">
-     <div class="container">
+     <div class="container ">
        <h3>Featured</h3>
       <% @tasks.each do | task | %>
         <div class="col-xs-6 col-lg-4">
@@ -39,6 +39,7 @@
    </div>
   </div>
 </div>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
