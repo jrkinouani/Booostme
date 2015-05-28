@@ -4,6 +4,8 @@ class CreateTasks < ActiveRecord::Migration
       t.string :title
       t.date :start_date
       t.date :end_date
+      t.integer :hour
+      t.string :state, default: "to_do"
       t.references :user, index: true
 
       t.timestamps null: false

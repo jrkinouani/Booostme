@@ -1,5 +1,6 @@
 class TaskController < ApplicationController
   before_action :set_task, :only => [:show, :text_boost, :picture_boost, :money_boost]
+  before_action :check_time_task, :only => [:show, :index]
   before_action :check_user
 
   def index
@@ -77,12 +78,25 @@ class TaskController < ApplicationController
     end
   end
 
+  def check_time_task
+    @tasks = Task.where("end_date <= ?", DateTime.now)
+    @tasks.each do | task|
+      if task.end_date < Date.today
+        byebug
+        task.transition_pending
+      elsif task.end_date == Date.today && task.hour < DateTime.now.hour
+        byebug
+        task.transition_pending
+      end
+    end
+  end
+
   def set_task
     @task = Task.find(params[:id])
   end
 
   def task_params
-    params.require(:task).permit(:title, :start_date, :end_date)
+    params.require(:task).permit(:title, :start_date, :end_date, :hour)
   end
 
   def boost_params

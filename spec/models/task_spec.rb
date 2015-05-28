@@ -14,6 +14,8 @@ describe Task do
   it {should respond_to(:title)}
   it {should validate_presence_of(:title)}
 
+  it {should respond_to(:hour)}
+
   it {should respond_to(:end_date)}
   it {should validate_presence_of(:end_date)}
   it {should allow_value(Date.today + 3).for(:end_date)}
