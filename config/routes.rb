@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       post 'picture_boost' => "task#picture_boost" 
       post 'money_boost' => "task#money_boost"
     end
+    collection do 
+      get  "category" => "task#category"
+    end
   end
 
   root 'welcome#index'

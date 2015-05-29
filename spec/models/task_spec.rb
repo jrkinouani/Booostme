@@ -16,11 +16,11 @@ describe Task do
 
   it {should respond_to(:hour)}
 
+  it {should respond_to(:state)}
+
   it {should respond_to(:end_date)}
   it {should validate_presence_of(:end_date)}
-  it {should allow_value(Date.today + 3).for(:end_date)}
-  it {should_not allow_value(Date.today + 1).for(:end_date)}
-  it {should_not allow_value(Date.today + 2).for(:end_date)}
+  it {should allow_value(Date.today).for(:end_date)}
   it {should_not allow_value(2.days.ago).for(:end_date)}
 
   it {should respond_to(:start_date)}

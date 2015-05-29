@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   before_action :check_time_task, :only => [:index]
 
   def index
-    @tasks = Task.where("state == ?", "pending").last(3)
+    @tasks = Task.where("state == ?", "to_do").last(3)
   end
 
   private

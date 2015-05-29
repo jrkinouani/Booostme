@@ -19,6 +19,21 @@ RSpec.describe TaskController, type: :controller do
     end
   end
 
+  describe "GET #category" do
+    it "populates an array of tasks" do
+      task_to_do = FactoryGirl.create(:task)
+      task_pending = FactoryGirl.create(:task)
+      task_pending.transition_pending
+      get :category, state: "pending"
+      assigns(:tasks).should eq([task_pending])
+    end
+
+    it "rendres the :index view" do 
+      get :category, state: "pending"
+      response.should render_template :category
+    end
+  end
+
 
   describe "GET #show" do
     it "assigns the requested task to @task" do 

@@ -4,7 +4,8 @@ class TaskController < ApplicationController
   before_action :check_user
 
   def index
-    @tasks = Task.all
+    @tasks = Task.where("state == ?", "to_do")
+    # @tasks = Task.all
   end
 
   def show
@@ -14,6 +15,11 @@ class TaskController < ApplicationController
   def new
     @task = Task.new
   end
+
+  def category
+    @tasks =  Task.where("state == ?", params[:state])
+  end
+
 
   def text_boost
     @boost = Boost.create(boost_params)
@@ -82,10 +88,8 @@ class TaskController < ApplicationController
     @tasks = Task.where("end_date <= ?", DateTime.now)
     @tasks.each do | task|
       if task.end_date < Date.today
-        byebug
         task.transition_pending
       elsif task.end_date == Date.today && task.hour < DateTime.now.hour
-        byebug
         task.transition_pending
       end
     end
