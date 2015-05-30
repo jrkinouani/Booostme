@@ -1,5 +1,5 @@
 class TaskController < ApplicationController
-  before_action :set_task, :only => [:show, :text_boost, :picture_boost, :money_boost]
+  before_action :set_task, :only => [:show, :text_boost, :picture_boost, :money_boost, :stop_timer]
   before_action :check_time_task, :only => [:show, :index]
   before_action :check_user
 
@@ -61,6 +61,17 @@ class TaskController < ApplicationController
     end
     redirect_to @task
   end
+
+  def stop_timer
+    if current_user == @task.user
+      @task.transition_pending
+      flash[:notice] = "The task has been stop"
+    else
+      flash[:error] = "your not the owner og the task"
+    end
+    redirect_to @task
+  end
+
 
   def create
     @task = Task.new(task_params)

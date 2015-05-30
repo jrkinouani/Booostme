@@ -7,11 +7,14 @@
       <h2><%= @task.title %></h2>
       <p>Owner <%= @task.user.login %></p>
       <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
-      <% if @task.time_before_end > 0 %>
+      <% if @task.time_before_end > 0 && @task.state == "to_do" %>
         <div class="clock" style="margin:2em;"></div>
         <div class="message"></div>
       <% else %>
         <h1>TIME IS FINISH </h1>
+      <% end %>
+      <% if current_user == @task.user %>
+        <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger", :role => "button", method: :put %>
       <% end %>
     </div>
     <div class=row>
