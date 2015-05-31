@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TaskController, type: :controller do
 
   before(:each) do 
-    login_user
+    @user = login_user
   end
 
   describe "GET #index" do
@@ -69,12 +69,13 @@ RSpec.describe TaskController, type: :controller do
   describe "PUT #stop_timer" do
     it "change the state of the task" do
       task = FactoryGirl.create(:task)
+      User.first.tasks << task
       put :stop_timer, id: task.id
       task.reload
       expect(task.state).to eql "pending"
     end
 
-    it "rendres the :index view" do 
+    it "rendres the :show view" do 
       task = FactoryGirl.create(:task)
       put :stop_timer, id: task.id
       response.should redirect_to Task.last

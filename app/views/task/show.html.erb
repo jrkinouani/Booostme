@@ -178,6 +178,7 @@
   $(document).ready(function() {
     var clock;
     var time_in_second = <%= @task.time_before_end %>
+    var state = "<%= @task.state %>"
     // var time_in_second = 10.23
 
     clock = $('.clock').FlipClock({
@@ -191,7 +192,7 @@
       });
     clock.setTime(time_in_second);
     clock.setCountdown(true);
-    if (time_in_second > 0) 
+    if (time_in_second > 0 && state == "") 
     {
       clock.start();
     }
