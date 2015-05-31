@@ -5,6 +5,7 @@ RSpec.describe "task/show.html.erb", type: :view do
     @task = FactoryGirl.build(:task)
     @boost = FactoryGirl.build(:boost)
     user = FactoryGirl.create(:user)
+    @task.end_date -= 1
     user.tasks << @task
     assign :task, @task
     render

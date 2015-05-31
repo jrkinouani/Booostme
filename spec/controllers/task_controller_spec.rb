@@ -65,9 +65,24 @@ RSpec.describe TaskController, type: :controller do
     end
   end
 
+  describe "PUT #validation_end" do
+    before :each do
+      @file = fixture_file_upload('spec/files/booostme_400vert.png', 'text/png')
+    end
+
+    it "change the state of the task to confirmed" do 
+      task = FactoryGirl.create(:task)
+      User.first.tasks << task
+      put :validation_end, id: task.id, image: @file
+      task.reload
+      expect(task.state).to eql "confirmed"
+    end
+  end
+
+
 
   describe "PUT #stop_timer" do
-    it "change the state of the task" do
+    it "change the state of the task to pending" do
       task = FactoryGirl.create(:task)
       User.first.tasks << task
       put :stop_timer, id: task.id

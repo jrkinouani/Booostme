@@ -1,5 +1,5 @@
 class TaskController < ApplicationController
-  before_action :set_task, :only => [:show, :text_boost, :picture_boost, :money_boost, :stop_timer]
+  before_action :set_task, :only => [:show, :text_boost, :picture_boost, :money_boost, :stop_timer, :validation_end]
   before_action :check_time_task, :only => [:show, :index]
   before_action :check_user
 
@@ -67,7 +67,22 @@ class TaskController < ApplicationController
       @task.transition_pending
       flash[:notice] = "The task has been stop"
     else
-      flash[:error] = "your not the owner og the task"
+      flash[:error] = "your not the owner of the task"
+    end
+    redirect_to @task
+  end
+
+  def validation_end
+    if current_user == @task.user && params[:image]
+      @task.validation_image = params[:image]
+      if @task.save
+        @task.transition_confirmed
+        flash[:notice] = "The task has confirmed"
+      else
+        flash[:error] = @task.errors.full_messages
+      end
+    else
+      flash[:error] = "your not the owner of the task"
     end
     redirect_to @task
   end

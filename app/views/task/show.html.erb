@@ -3,19 +3,28 @@
     <p class="pull-right visible-xs">
       <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
     </p>
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-image: url(<%= @task.validation_image.xxl.url %>);background-repeat: no-repeat;">
       <h2><%= @task.title %></h2>
       <p>Owner <%= @task.user.login %></p>
       <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
       <% if @task.time_before_end > 0 && @task.state == "to_do" %>
         <div class="clock" style="margin:2em;"></div>
         <div class="message"></div>
+        <% if current_user == @task.user %>
+          <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger", :role => "button", method: :put %>
+        <% end %>
       <% else %>
         <h1>TIME IS FINISH </h1>
       <% end %>
-      <% if current_user == @task.user %>
-        <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger", :role => "button", method: :put %>
-      <% end %>
+      <%= form_for(@task, url: validation_end_task_path(@task), html: {method: :put,  multipart: true}) do |f|%>
+        <div class="field">
+          <%= file_field_tag :image, id: "validation_image"%>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "send image", :class => "btn btn-lg btn-primary" %>
+        </div>
+      <%end%>
     </div>
     <div class=row>
 
@@ -192,7 +201,7 @@
       });
     clock.setTime(time_in_second);
     clock.setCountdown(true);
-    if (time_in_second > 0 && state == "") 
+    if (time_in_second > 0 && state == "to_do") 
     {
       clock.start();
     }

@@ -5,6 +5,7 @@ class CreateTasks < ActiveRecord::Migration
       t.date :start_date
       t.date :end_date
       t.integer :hour
+      t.string :validation_image
       t.string :state, default: "to_do"
       t.references :user, index: true
 
