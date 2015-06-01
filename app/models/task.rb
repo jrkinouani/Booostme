@@ -6,6 +6,7 @@ class Task < ActiveRecord::Base
   validates :end_date, date: {after_or_equal_to: Date.today}, on: :create
 
   mount_uploader :validation_image, ImageUploader
+  mount_uploader :cover_image, ImageUploader
 
 
   def time_before_end

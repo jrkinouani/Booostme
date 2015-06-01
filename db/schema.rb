@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150509142529) do
     t.date     "end_date"
     t.integer  "hour"
     t.string   "validation_image"
+    t.string   "cover_image"
     t.string   "state",            default: "to_do"
     t.integer  "user_id"
     t.datetime "created_at",                         null: false

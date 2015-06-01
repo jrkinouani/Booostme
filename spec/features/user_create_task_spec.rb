@@ -18,6 +18,7 @@ describe 'UserCreateTask' do
       fill_in 'Title', :with => "task 1"
       fill_in 'End date', :with => Date.today + 6
       fill_in 'Hour', :with => 16
+      attach_file "task_cover_image", "spec/files/booostme_400vert.png"
       click_button 'Create'
       page.should have_content("Task task 1 succefully created")
     end

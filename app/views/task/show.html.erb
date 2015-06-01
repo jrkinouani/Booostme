@@ -3,7 +3,7 @@
     <p class="pull-right visible-xs">
       <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
     </p>
-    <div class="jumbotron" style="background-image: url(<%= @task.validation_image.xxl.url %>);background-repeat: no-repeat;">
+    <div class="jumbotron">
       <h2><%= @task.title %></h2>
       <p>Owner <%= @task.user.login %></p>
       <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
@@ -26,7 +26,11 @@
         </div>
       <%end%>
     </div>
-    <div class=row>
+    <div class='row'>
+      <div class="col-lg-6"><%= image_tag(@task.cover_image.xxl, :class => "image_100_width") %></div>
+      <div class="col-lg-6"><%= image_tag(@task.validation_image.xxl, :class => "image_100_width")  %></div>
+    </div>
+    <div class='row'>
 
       <h3>Boost him</h3>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

@@ -126,7 +126,7 @@ class TaskController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :start_date, :end_date, :hour)
+    params.require(:task).permit(:title, :start_date, :end_date, :hour, :cover_image)
   end
 
   def boost_params

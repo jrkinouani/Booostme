@@ -102,6 +102,8 @@ RSpec.describe TaskController, type: :controller do
     context "with valid attributes" do
       it "saves the new task in the database" do 
         task_attr = FactoryGirl.attributes_for(:task)
+        @file = fixture_file_upload('spec/files/booostme_400vert.png', 'text/png')
+        task_attr[:cover_image] = @file
         expect{
           post :create, task: task_attr
         }.to change(Task, :count).by(1)
