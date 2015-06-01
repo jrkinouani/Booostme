@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TaskController, type: :controller do
 
   before(:each) do 
-    @user = login_user
+    login_user
   end
 
   describe "GET #index" do
@@ -16,21 +16,6 @@ RSpec.describe TaskController, type: :controller do
     it "rendres the :index view" do 
       get :index
       response.should render_template :index
-    end
-  end
-
-  describe "GET #category" do
-    it "populates an array of tasks" do
-      task_to_do = FactoryGirl.create(:task)
-      task_pending = FactoryGirl.create(:task)
-      task_pending.transition_pending
-      get :category, state: "pending"
-      assigns(:tasks).should eq([task_pending])
-    end
-
-    it "rendres the :index view" do 
-      get :category, state: "pending"
-      response.should render_template :category
     end
   end
 
@@ -65,45 +50,11 @@ RSpec.describe TaskController, type: :controller do
     end
   end
 
-  describe "PUT #validation_end" do
-    before :each do
-      @file = fixture_file_upload('spec/files/booostme_400vert.png', 'text/png')
-    end
-
-    it "change the state of the task to confirmed" do 
-      task = FactoryGirl.create(:task)
-      User.first.tasks << task
-      put :validation_end, id: task.id, image: @file
-      task.reload
-      expect(task.state).to eql "confirmed"
-    end
-  end
-
-
-
-  describe "PUT #stop_timer" do
-    it "change the state of the task to pending" do
-      task = FactoryGirl.create(:task)
-      User.first.tasks << task
-      put :stop_timer, id: task.id
-      task.reload
-      expect(task.state).to eql "pending"
-    end
-
-    it "rendres the :show view" do 
-      task = FactoryGirl.create(:task)
-      put :stop_timer, id: task.id
-      response.should redirect_to Task.last
-    end
-  end
-
 
   describe "POST #create" do
     context "with valid attributes" do
       it "saves the new task in the database" do 
         task_attr = FactoryGirl.attributes_for(:task)
-        @file = fixture_file_upload('spec/files/booostme_400vert.png', 'text/png')
-        task_attr[:cover_image] = @file
         expect{
           post :create, task: task_attr
         }.to change(Task, :count).by(1)

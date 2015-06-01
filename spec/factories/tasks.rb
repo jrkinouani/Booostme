@@ -1,15 +1,9 @@
 FactoryGirl.define do
-  sequence :composite_id do |n| 
-    n
-  end
-
   factory :task do
-    id {FactoryGirl.generate( :composite_id )}
+    id {Faker::Number.digit}
     title {Faker::Name.title}
     start_date {Date.today}
     end_date {Faker::Time.between((Date.today + 3), (Date.today + 5))}
-    hour {Faker::Number.digit}
-    state "to_do"
     user nil
   end
 
