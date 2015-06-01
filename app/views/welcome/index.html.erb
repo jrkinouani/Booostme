@@ -14,7 +14,7 @@
           <h2><%= task.title %></h2>
           <p> Due date <%= task.end_date %></p>
           <div class="countdown">
-            <p class="date" style="display:none"><%= task.end_date.strftime("%d %B %Y") + " #{task.hour}:00:00" %></p>
+            <p class="date" style="display:none"><%= task.end_date.strftime("%d %B %Y") %></p>
             <span class="days">00</span>
             <span class="timeRefDays">days</span>
             <span class="hours">00</span>
