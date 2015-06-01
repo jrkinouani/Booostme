@@ -21,7 +21,7 @@ class Task < ActiveRecord::Base
 
   def transition_confirmed
     self.state = "confirmed"
-    save
+    self.save
   end
 
 end
