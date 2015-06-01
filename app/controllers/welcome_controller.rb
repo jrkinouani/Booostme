@@ -13,7 +13,6 @@ class WelcomeController < ApplicationController
       if task.end_date < Date.today
         task.transition_pending
       elsif task.end_date == Date.today && task.hour <= DateTime.now.hour && DateTime.now.minute > 0
-        byebug
         task.transition_pending
       end
     end
