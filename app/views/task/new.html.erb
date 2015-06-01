@@ -1,6 +1,6 @@
 <h2>NEW  TASK</h2>
 
-<%= form_for(@task, url: {action: "create"}, html: { method: :post }, :html => {:class => "form-horizontal"} ) do |f| %>
+<%= form_for(@task, url: {action: "create"}, html: { method: :post, multipart: true }, :html => {:class => "form-horizontal"} ) do |f| %>
 
   <div class="field">
     <%= f.label :title %><br />
@@ -12,6 +12,16 @@
   <div class="field">
     <%= f.label :end_date %><br />
     <%= f.text_field :end_date, autofocus: true, :type => "date" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :hour %><br />
+    <%= f.text_field :hour, autofocus: true, :type => "number" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cover_image %><br />
+    <%= f.file_field :cover_image, autofocus: true %>
   </div>
 
   <br />

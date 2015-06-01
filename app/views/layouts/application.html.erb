@@ -3,8 +3,9 @@
 <head>
   <title>Booostme</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+
+  <%= javascript_include_tag 'application'%>
+<!--   <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %> -->
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
@@ -27,6 +28,16 @@
         <ul class="nav navbar-nav">
           <li><%= link_to "Create task",  new_task_path%></li>
           <li><%= link_to "All task",  task_index_path%></li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              Dropdown <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><%= link_to "Todo task", category_task_index_path(:state => "to_do"), :class => "btn btn-default", :role => "button" %></li>
+              <li><%= link_to "Pending task", category_task_index_path(:state => "pending"), :class => "btn btn-default", :role => "button" %></li>
+              <li><%= link_to "Confirmed task", category_task_index_path(:state => "confirmed"), :class => "btn btn-default", :role => "button" %></li>
+            </ul>
+          </li>
           <%= render 'devise/shared/login_items' %>
         </ul>
       </div><!-- /.nav-collapse -->

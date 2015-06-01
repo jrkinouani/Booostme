@@ -6,6 +6,11 @@ Rails.application.routes.draw do
       post 'text_boost' => "task#text_boost"
       post 'picture_boost' => "task#picture_boost" 
       post 'money_boost' => "task#money_boost"
+      put  'stop_timer' => "task#stop_timer"
+      put  'validation_end' => "task#validation_end"
+    end
+    collection do 
+      get  "category" => "task#category"
     end
   end
 

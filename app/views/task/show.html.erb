@@ -6,11 +6,31 @@
     <div class="jumbotron">
       <h2><%= @task.title %></h2>
       <p>Owner <%= @task.user.login %></p>
-      <p>Due date <%= @task.end_date%></p>
-      <div class="clock" style="margin:2em;"></div>
-      <div class="message"></div>
+      <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
+      <% if @task.time_before_end > 0 && @task.state == "to_do" %>
+        <div class="clock" style="margin:2em;"></div>
+        <div class="message"></div>
+        <% if current_user == @task.user %>
+          <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger", :role => "button", method: :put %>
+        <% end %>
+      <% else %>
+        <h1>TIME IS FINISH </h1>
+      <% end %>
+      <%= form_for(@task, url: validation_end_task_path(@task), html: {method: :put,  multipart: true}) do |f|%>
+        <div class="field">
+          <%= file_field_tag :image, id: "validation_image"%>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "send image", :class => "btn btn-lg btn-primary" %>
+        </div>
+      <%end%>
     </div>
-    <div class=row>
+    <div class='row'>
+      <div class="col-lg-6"><%= image_tag(@task.cover_image.xxl, :class => "image_100_width") %></div>
+      <div class="col-lg-6"><%= image_tag(@task.validation_image.xxl, :class => "image_100_width")  %></div>
+    </div>
+    <div class='row'>
 
       <h3>Boost him</h3>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -170,20 +190,25 @@
   
   $(document).ready(function() {
     var clock;
+    var time_in_second = <%= @task.time_before_end %>
+    var state = "<%= @task.state %>"
+    // var time_in_second = 10.23
 
     clock = $('.clock').FlipClock({
           clockFace: 'DailyCounter',
           autoStart: false,
           callbacks: {
             stop: function() {
-              $('.message').html('The clock has stopped!')
-            }
+                location.reload()
+              }
           }
       });
-          
-      clock.setTime(<%= @task.time_before_end %>);
-      clock.setCountdown(true);
+    clock.setTime(time_in_second);
+    clock.setCountdown(true);
+    if (time_in_second > 0 && state == "to_do") 
+    {
       clock.start();
+    }
 
   });
 </script>
