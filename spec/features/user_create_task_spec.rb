@@ -11,7 +11,7 @@ describe 'UserCreateTask' do
       fill_in 'Password', :with => user.password
       click_button 'Log in'
       page.should have_content 'Signed in successfully'
-      click_link 'Create task'
+      click_link 'Create challenge'
     end
 
     it "allows user to create task" do 
