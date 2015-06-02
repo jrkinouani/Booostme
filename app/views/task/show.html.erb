@@ -5,7 +5,7 @@
     </p>
     <div class="jumbotron">
       <h2><%= @task.title %></h2>
-      <p>Owner <%= @task.user.login %></p>
+      <p>By <%= @task.user.login %></p>
       <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
       <% if @task.time_before_end > 0 && @task.state == "to_do" %>
         <div class="clock" style="margin:2em;"></div>
@@ -31,8 +31,7 @@
       <div class="col-lg-6"><%= image_tag(@task.validation_image.xxl, :class => "image_100_width")  %></div>
     </div>
     <div class='row'>
-
-      <h3>Boost him</h3>
+      <h3>Boost <%= @task.user.login %> with :</h3>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="message">
@@ -54,96 +53,102 @@
                 <div class="actions">
                   <%= f.submit "send Boost", :class => "btn btn-lg btn-primary" %>
                 </div>
-              <%end%>
+
+              <% end %>
+            </div>
+          </div>
+           <div class="col-sm-3">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="photo">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                     <%= image_tag("picture.png", :class => "img_booost") %> Photo
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
+                <div class="panel-body">
+                  <%= form_for(@boost, url: picture_boost_task_path(@task), html: {method: :post, multipart: true}) do |f|%>
+                    <%= f.hidden_field :type, :value => "PictureBoost" %>
+                    <div class="field">
+                      <%= f.file_field :image%>
+                    </div>
+
+                    <div class="actions">
+                      <%= f.submit "send Picture", :class => "btn btn-lg btn-primary" %>
+                    </div>
+                  <%end%>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="photo">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <%= image_tag("money.png", :class => "img_booost") %> Money
+                </a>
+              </h4>
+            </div>
+            <div class="col-sm-3">
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
+                <div class="panel-body">
+                  <%= form_for(@boost, url: money_boost_task_path(@task), html: {method: :post, id: "payment-form"}) do |f|%>
+                    <%= f.hidden_field :type, :value => "MoneyBoost" %>
+                    <span class="payment-errors"></span>
+
+                    <%= f.radio_button(:money, 100) %>
+                    <%= label_tag(:one_dollar, "$1") %>
+                    <%= f.radio_button(:money, 500) %>
+                    <%= label_tag(:five_dollar, "$5") %>
+                    <%= f.radio_button(:money, 1000) %>
+                    <%= label_tag(:ten_dollar, "$10") %>
+
+                    <div class="form-row">
+                      <label>
+                        <span>Card Number</span>
+                        <input type="text" size="20" data-stripe="number" id="card_number" />
+                      </label>
+                    </div>
+
+                    <div class="form-row">
+                      <label>
+                        <span>CVC</span>
+                        <input type="text" size="4" data-stripe="cvc" id="cvc"/>
+                      </label>
+                    </div>
+
+                    <div class="form-row">
+                      <label>
+                        <span>Expiration (MM/YYYY)</span>
+                        <input type="text" size="2" data-stripe="exp-month" id="exp-month"/>
+                      </label>
+                      <span> / </span>
+                      <input type="text" size="4" data-stripe="exp-year" id="exp-year" />
+                    </div>
+
+                    <div class="actions">
+                      <%= f.submit "send money", :class => "btn btn-lg btn-primary" %>
+                    </div>
+                  <%end%>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="photo">
-            <h4 class="panel-title">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                With photo
-              </a>
-            </h4>
-          </div>
-          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
-            <div class="panel-body">
-              <%= form_for(@boost, url: picture_boost_task_path(@task), html: {method: :post, multipart: true}) do |f|%>
-                <%= f.hidden_field :type, :value => "PictureBoost" %>
-                <div class="field">
-                  <%= f.file_field :image%>
-                </div>
 
-                <div class="actions">
-                  <%= f.submit "send Picture", :class => "btn btn-lg btn-primary" %>
-                </div>
-              <%end%>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="photo">
-            <h4 class="panel-title">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                With money
-              </a>
-            </h4>
-          </div>
-          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="photo">
-            <div class="panel-body">
-              <%= form_for(@boost, url: money_boost_task_path(@task), html: {method: :post, id: "payment-form"}) do |f|%>
-                <%= f.hidden_field :type, :value => "MoneyBoost" %>
-                <span class="payment-errors"></span>
-
-                <%= f.radio_button(:money, 100) %>
-                <%= label_tag(:one_dollar, "$1") %>
-                <%= f.radio_button(:money, 500) %>
-                <%= label_tag(:five_dollar, "$5") %>
-                <%= f.radio_button(:money, 1000) %>
-                <%= label_tag(:ten_dollar, "$10") %>
-
-                <div class="form-row">
-                  <label>
-                    <span>Card Number</span>
-                    <input type="text" size="20" data-stripe="number" id="card_number" />
-                  </label>
-                </div>
-
-                <div class="form-row">
-                  <label>
-                    <span>CVC</span>
-                    <input type="text" size="4" data-stripe="cvc" id="cvc"/>
-                  </label>
-                </div>
-
-                <div class="form-row">
-                  <label>
-                    <span>Expiration (MM/YYYY)</span>
-                    <input type="text" size="2" data-stripe="exp-month" id="exp-month"/>
-                  </label>
-                  <span> / </span>
-                  <input type="text" size="4" data-stripe="exp-year" id="exp-year" />
-                </div>
-
-                <div class="actions">
-                  <%= f.submit "send money", :class => "btn btn-lg btn-primary" %>
-                </div>
-              <%end%>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <h3>List of boost</h3>
-      <% @task.boosts.each do |boost|%>
-        <div class="col-xs-6 col-lg-4">
-        <%= boost.content.html_safe%>
-           <p>by <%= boost.user.login%></p>
-        </div>
-      <% end %>
-    </div>
+      <div class="row">
+        <h3>List of boost</h3>
+        <% @task.boosts.each do |boost|%>
+          <div class="col-xs-6 col-lg-4">
+          <%= boost.content.html_safe%>
+             <p>by <%= boost.user.login%></p>
+          </div>
+        <% end %>
+      </div>
   </div>
 </div>
 

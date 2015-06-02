@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: 'registrations'}
   get 'launchingpage' => 'static_pages#launchingpage'
   get 'about' => 'static_pages#about'  
+  get 'terms' => 'static_pages#terms'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
