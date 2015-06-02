@@ -24,7 +24,7 @@ RSpec.describe "task/show.html.erb", type: :view do
   end
 
   it "display Title Boot him" do 
-    rendered.should have_selector('h3', :text => "Boost him")
+    rendered.should have_selector('h3', :text => "Boost #{@task.user.login} with :")
   end
 
 
