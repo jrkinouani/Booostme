@@ -23,15 +23,17 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function(){
+<% if params["state"] == "to_do" %>
+  <script type="text/javascript">
+    $(document).ready(function(){
 
-    $('.countdown').each(function(){
-      $(this).countdown({
-        date: $(this).find(".date").text(),
-        format: "on"
+      $('.countdown').each(function(){
+        $(this).countdown({
+          date: $(this).find(".date").text(),
+          format: "on"
+        });
       });
-    });
 
-  });
-</script>
+    });
+  </script>
+<% end %>
