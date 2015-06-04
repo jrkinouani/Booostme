@@ -55,6 +55,8 @@ body
 	  background-size: cover;
 	  padding: 0;
 	  margin: 0;
+    position: absolute;
+    left: 0;
 }
 .punchline
 {
@@ -69,6 +71,11 @@ body
 	height:250px;
 	width:250px;
 }
+.task_list
+{
+  margin-top: 670px;
+}
+
 /*page task new*/
 
 .container.task
@@ -89,6 +96,31 @@ body
 	text-align:center;
 }
 /*page show*/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.img_preview
+{
+  margin : 20px;
+}
+
 .jumbotron 
 {
 	padding-left: 60px;
@@ -99,6 +131,11 @@ body
 {
 	height:40px;
 	width:40px;
+}
+
+.stop_timer_button
+{
+  margin-top: 40%;
 }
 /*page index task*/
 #offcanvas

@@ -10,7 +10,7 @@
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
 </head>
-<bo<dy cz-shortcut-listen="true">
+<body cz-shortcut-listen="true">
 
 
   <nav class="navbar navbar-fixed-top navbar-inverse">
@@ -48,27 +48,25 @@
   </nav>
 
 
-  
+  <div class="container">
     <% flash.each do |name, msg| -%>
       <%= content_tag :div, msg, class: name %>
     <% end -%>
 
     <%= yield %>
-
-  <div class="container">
-    <footer>  
-      <ul class="dsg-landing-list">
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "Terms", terms_path %>
-      </li>
-      <li>
-        ©Booostme 2015
-      </li>
-    </ul>
-    </footer>
+      <footer>  
+        <ul class="dsg-landing-list">
+          <li>
+            <%= link_to "About", about_path %>
+          </li>
+          <li>
+            <%= link_to "Terms", terms_path %>
+          </li>
+          <li>
+            ©Booostme 2015
+          </li>
+        </ul>
+      </footer>
   </div>
 
 </body>

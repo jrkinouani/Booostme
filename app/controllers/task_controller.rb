@@ -113,10 +113,12 @@ class TaskController < ApplicationController
   def check_time_task
     @tasks = Task.where("end_date <= ?", DateTime.now)
     @tasks.each do | task|
-      if task.end_date < Date.today
-        task.transition_pending
-      elsif task.end_date == Date.today && task.hour < DateTime.now.hour
-        task.transition_pending
+      if task.state != "confirmed"
+        if task.end_date < Date.today
+          task.transition_pending
+        elsif task.end_date == Date.today && task.hour < DateTime.now.hour
+          task.transition_pending
+        end
       end
     end
   end

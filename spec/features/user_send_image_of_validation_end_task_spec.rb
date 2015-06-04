@@ -7,6 +7,7 @@ describe "UserSendImageOfValidationEndTask" do
   context "user is login" do 
     before(:each) do
       task.end_date -= 1
+      task.transition_pending
       user.tasks << task
       visit root_path
       click_link 'Login'
@@ -20,7 +21,7 @@ describe "UserSendImageOfValidationEndTask" do
     it "should allow user to send image to validation task" do 
       user.tasks << task
       attach_file "validation_image", "spec/files/booostme_400vert.png"
-      click_button "send image"
+      click_button "Upload image"
       page.should have_content "The task has confirmed"
     end
   end
