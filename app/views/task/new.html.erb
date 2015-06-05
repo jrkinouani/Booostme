@@ -13,7 +13,7 @@
 
       <div class="field">
         <%= f.label :end_date %><br />
-        <%= f.text_field :end_date, autofocus: true, :type => "date", :class => "form-control" %>
+        <%= f.text_field :end_date, autofocus: true, :class => "form-control datepicker" %>
       </div>
 
       <br />
@@ -34,3 +34,12 @@
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $('.datepicker').datepicker();
+    $('.datepicker').datepicker({
+                                  format: "dd/mm/yyyy"
+                                });
+  });
+</script>
