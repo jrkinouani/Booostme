@@ -38,6 +38,7 @@ gem "fog-aws"
 gem "mini_magick"
 gem 'stripe'
 gem 'stripe-ruby-mock'
+gem 'bootstrap-datepicker-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
