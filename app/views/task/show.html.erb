@@ -149,7 +149,8 @@
         <hr />
         <% @task.boosts.each do |boost|%>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 img_profile_boost">
+              <%= image_tag(@task.user.avatar.thumb) %>
             </div>
             <div class="col-md-5">
               <p>
@@ -168,22 +169,6 @@
 
 
 <script type="text/javascript">
-
-  function readURL(input, id_input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#' + id_input)
-          .attr('src', e.target.result)
-          .width(200)
-          .height(200);
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
 
   // This identifies your website in the createToken call below
   Stripe.setPublishableKey('pk_test_umZbkFDV0vblJJX97EuGm9Su');

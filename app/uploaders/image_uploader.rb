@@ -37,9 +37,16 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   process :resize_to_fit => [800, 800]
   # Create different versions of your uploaded files:
-  version :thumb do
-    process :resize_to_fit => [200, 200]
+  # version :thumb do
+  #   process :resize_to_fit => [200, 200]
+  # end
+  
+  version :thumb do    
+    process resize_to_fit: [200, 200]
+    process crop: '200x200+0+0'
+    #process resize_and_crop: 200
   end
+
 
   version :xxl do
     process :resize_to_fit => [1200, 400]
@@ -56,5 +63,28 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+# Simplest way
+  def crop(geometry)
+    manipulate! do |img|
+      img.crop(geometry)
+      img
+    end
+  end
+
+  # Resize and crop square from Center
+  def resize_and_crop(size)
+    manipulate! do |image|
+      if image[:width] < image[:height]
+        remove = ((image[:height] - image[:width])/2).round 
+        image.shave("0x#{remove}") 
+      elsif image[:width] > image[:height] 
+        remove = ((image[:width] - image[:height])/2).round
+        image.shave("#{remove}x0")
+      end
+      image.resize("#{size}x#{size}")
+      image
+    end
+  end
 
 end
