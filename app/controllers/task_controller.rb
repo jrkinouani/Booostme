@@ -90,6 +90,7 @@ class TaskController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.hour = DateTime.now.hour
     @task.start_date = Date.today
     if @task.save
       flash[:notice] = "Task #{@task.title} succefully created"

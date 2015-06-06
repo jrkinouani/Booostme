@@ -3,7 +3,8 @@ class Task < ActiveRecord::Base
   has_many :boosts
   validates :title, :start_date, :hour, :end_date, :presence => true
   validates :start_date, date: {equal_to: Date.today}, on: :create
-  validates :end_date, date: {after_or_equal_to: Date.today}, on: :create
+  validates :end_date, date: {after_or_equal_to: (Date.today + 1), before_or_equal_to: (Date.today + 98)}, on: :create
+  validates :hour, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 23}
 
   mount_uploader :validation_image, ImageUploader
   mount_uploader :cover_image, ImageUploader
