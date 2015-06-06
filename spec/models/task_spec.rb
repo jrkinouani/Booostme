@@ -15,6 +15,12 @@ describe Task do
   it {should validate_presence_of(:title)}
 
   it {should respond_to(:hour)}
+  it {should allow_value(0).for(:hour)}
+  it {should allow_value(12).for(:hour)}
+  it {should allow_value(23).for(:hour)}
+  it {should_not allow_value(-1).for(:hour)}
+  it {should_not allow_value(24).for(:hour)}
+  it {should_not allow_value(26).for(:hour)}
 
   it {should respond_to(:state)}
 
@@ -22,11 +28,20 @@ describe Task do
 
   it {should respond_to(:cover_image)}
 
-
   it {should respond_to(:end_date)}
   it {should validate_presence_of(:end_date)}
-  it {should allow_value(Date.today).for(:end_date)}
- 
+
+  it "should allow value date today +1 for end_date" do
+    task = FactoryGirl.build(:task, end_date: (Date.today +1))
+    task.should_not be_valid
+  end
+
+
+  it "should not allow value date today for end_date" do
+    task = FactoryGirl.build(:task, end_date: Date.today)
+    task.should_not be_valid
+  end
+
   it "should not allow 2 date ago end_date" do
     task = FactoryGirl.build(:task, end_date: 2.days.ago)
     task.should_not be_valid
@@ -35,7 +50,13 @@ describe Task do
 
   it {should respond_to(:start_date)}
   it {should validate_presence_of(:start_date)}  
-  it {should allow_value(Date.today).for(:start_date)}
+  # it {should allow_value(Date.today).for(:start_date)}
+
+  it "should allow value date today for start_date" do
+    task = FactoryGirl.build(:task, start_date: Date.today)
+    task.should be_valid
+  end
+
 
   it "should not allow 1 date ago start_date" do
     task = FactoryGirl.build(:task, start_date: 1.days.ago)

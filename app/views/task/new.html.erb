@@ -19,11 +19,6 @@
       <br />
 
       <div class="field">
-        <%= f.label :hour %><br />
-        <%= f.text_field :hour, autofocus: true, :type => "number" %>
-      </div>
-
-      <div class="field">
         <%= f.label :cover_image %><br />
         <%= f.file_field :cover_image, autofocus: true %>
       </div>
@@ -37,9 +32,12 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    // $('.datepicker').datepicker();
     $('.datepicker').datepicker({
-                                  format: "dd/mm/yyyy"
+                                  format: "dd/mm/yyyy",
+                                  startDate: "<%= Date.today.strftime("%d/%m/%Y")%>",
+                                  endDate: "<%= (Date.today + 98).strftime("%d/%m/%Y")%>",
+                                  clearBtn: true,
+                                  todayHighlight: true
                                 });
   });
 </script>
