@@ -145,6 +145,7 @@
       </div>
       <div class="row">
         <h3>List of boost</h3>
+        <h4>Number of boost : <%= @task.boosts.count %> </h4>
         <hr />
         <% @task.boosts.each do |boost|%>
           <div class="row">
