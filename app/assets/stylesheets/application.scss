@@ -12,9 +12,18 @@ body
 {
  	max-width: 330px;
  	padding: 15px;
-  	margin: 0 auto;
+	margin: 0 auto;
 }
 
+.error
+{
+  color: red;
+}
+
+.page_content
+{
+  margin-top: 100px;
+}
 .navbar-inverse .navbar-nav > li > a 
 {
   	color: white;
@@ -38,12 +47,12 @@ body
 }
 .pull-right
 {
-	margin-top:10px;
+    margin-top:10px;
 }
 .linknav
 {
-	color:white !important;
-	font-size:18px;
+    color:white !important;
+    font-size:18px;
 }
 /*page index task*/
 .menu_content
@@ -57,6 +66,7 @@ body
 	  margin: 0;
     position: absolute;
     left: 0;
+    top:0;
 }
 .punchline
 {
@@ -80,7 +90,6 @@ body
 
 .container.task
 {
-	margin-top:100px;
 	background-color:transparent!important;
 }
 .form-signin
