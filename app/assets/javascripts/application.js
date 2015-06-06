@@ -19,6 +19,21 @@
 //= require_tree .
 
 
+function readURL(input, id_input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('#' + id_input)
+        .attr('src', e.target.result)
+        .width(200)
+        .height(200);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 (function (e) {
   e.fn.countdown = function (t, n) {
   function i() {

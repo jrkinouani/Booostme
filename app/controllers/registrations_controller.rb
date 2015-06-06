@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
  
   def sign_up_params
-    params.require(:user).permit(:login, :email, :password, :password_confirmation)
+    params.require(:user).permit(:login, :email, :password, :password_confirmation, :avatar, :avatar_cache)
   end
  
   #  specify their first and last names  when updating their profiles.

@@ -25,7 +25,7 @@ describe User do
   it { should  validate_length_of(:password).is_at_least(8)}
 
   it { should  respond_to(:avatar)}
-  it { should_not validate_presence_of(:avatar)}
+  # it { should  validate_presence_of(:avatar)}
 
   it { should  respond_to(:description)}
   it { should_not validate_presence_of(:description)}
