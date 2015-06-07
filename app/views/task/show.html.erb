@@ -1,170 +1,54 @@
-<div class="row row-offcanvas row-offcanvas-right">
-  <div class="col-xs-12 col-sm-12">
-    <p class="pull-right visible-xs">
-      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-    </p>
-    <div class="jumbotron row">
+<div class="col-md-2 item_show_task">
+  <%=  render "user_task_information" %>
+  <%=  render "boost_type" %>
+</div>
+
+<div class="col-md-6">
+  <div class="row item_show_task">
+    <h2><%= @task.title.capitalize %></h2>
+    <p>By <%= @task.user.login %></p>
+    <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
+    <% if @task.time_before_end > 0 && @task.state == "to_do" %>
+
+      <div class="clock row" style="margin:2em;"></div>
       <div class="row">
-        <h2><%= @task.title %></h2>
-        <p>By <%= @task.user.login %></p>
-        <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
-        <% if @task.time_before_end > 0 && @task.state == "to_do" %>
-
-          <div class="clock col-md-8" style="margin:2em;"></div>
-          <div class="col-md-2">
-            <% if current_user == @task.user %>
-              <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger stop_timer_button", :role => "button", method: :put %>
-            <% end %>
-          </div>
-          <div class="message"></div>
-        <% else %>
-          <h1>TIME IS FINISH </h1>
-          <%= form_for(@task, url: validation_end_task_path(@task), html: {method: :put,  multipart: true}) do |f|%>
-            <div class="field row">
-              <div class="col-md-3">
-                  <span class="file-input btn btn-block btn-primary btn-file">
-                      Choose File &hellip;  <%= file_field_tag :image, :class => "file", :onchange => "readURL(this, 'img_prev');", id: "validation_image"%>
-                  </span>
-                  <img id="img_prev" class="img_preview" />
-              </div>
-            </div>
-            <div class="actions row">
-              <%= f.submit "Upload image", :class => "btn btn-lg btn-primary" %>
-            </div>
-          <%end%>
-        <%end%>
-      </div>
-      <% if @task.state != "confirmed" %>
-        <div class="row col-md-offset-2">
-          <div><%= image_tag(@task.cover_image.xxl) %></div>
-        </div>
-      <%end%>
-    </div>
-    <% if @task.state == "confirmed" %>
-      <div class='row'>
-        <div class="col-lg-6"><%= image_tag(@task.cover_image.xxl, :class => "image_100_width") %></div>
-        <div class="col-lg-6"><%= image_tag(@task.validation_image.xxl, :class => "image_100_width")  %></div>
-      </div>
-    <%end%>
-
-
-    <div class='row'>
-      <h3>Boost <%= @task.user.login %> with :</h3>
-      <div role="tabpanel">
-
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
-            <a href="#home" aria-controls="home" role="tab" data-toggle="tab"><%= image_tag("pencil.png", :class => "img_booost") %> With message</a>
-          </li>
-          <li role="presentation">
-            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><%= image_tag("picture.png", :class => "img_booost") %> Photo</a>
-          </li>
-          <li role="presentation">
-            <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><%= image_tag("money.png", :class => "img_booost") %> Money</a>
-          </li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home">
-            <%= form_for(@boost, url: text_boost_task_path(@task), html: {method: :post}) do |f|%>
-              <%= f.hidden_field :type, :value => "TextBoost" %>
-              <div class="field">
-                <%= f.label :text %><br />
-                <%= f.text_area :text, autofocus: true, size: "24x6" %>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "send Boost", :class => "btn btn-lg btn-primary" %>
-              </div>
-
-            <% end %>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="profile">
-            <%= form_for(@boost, url: picture_boost_task_path(@task), html: {method: :post, multipart: true}) do |f|%>
-              <%= f.hidden_field :type, :value => "PictureBoost" %>
-              <br/>
-              <div class="field row">
-                <div class="col-md-3">
-                    <span class="file-input btn btn-block btn-primary btn-file">
-                        Choose File &hellip;  <%= f.file_field :image, :class => "file", :onchange => "readURL(this, 'img_prev_boost');"%>
-                    </span>
-                    <img id="img_prev_boost" class="img_preview" />
-                </div>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "send Picture", :class => "btn btn-lg btn-primary" %>
-              </div>
-            <%end%>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="messages">
-            <%= form_for(@boost, url: money_boost_task_path(@task), html: {method: :post, id: "payment-form"}) do |f|%>
-              <%= f.hidden_field :type, :value => "MoneyBoost" %>
-              <span class="payment-errors"></span>
-
-              <%= f.radio_button(:money, 100) %>
-              <%= label_tag(:one_dollar, "$1") %>
-              <%= f.radio_button(:money, 500) %>
-              <%= label_tag(:five_dollar, "$5") %>
-              <%= f.radio_button(:money, 1000) %>
-              <%= label_tag(:ten_dollar, "$10") %>
-
-              <div class="form-row">
-                <label>
-                  <span>Card Number</span>
-                  <input type="text" size="20" data-stripe="number" id="card_number" />
-                </label>
-              </div>
-
-              <div class="form-row">
-                <label>
-                  <span>CVC</span>
-                  <input type="text" size="4" data-stripe="cvc" id="cvc"/>
-                </label>
-              </div>
-
-              <div class="form-row">
-                <label>
-                  <span>Expiration (MM/YYYY)</span>
-                  <input type="text" size="2" data-stripe="exp-month" id="exp-month"/>
-                </label>
-                <span> / </span>
-                <input type="text" size="4" data-stripe="exp-year" id="exp-year" />
-              </div>
-
-              <div class="actions">
-                <%= f.submit "send money", :class => "btn btn-lg btn-primary" %>
-              </div>
-            <%end%>
-          </div>
-
-        </div>
-
-      </div>
-      <div class="row">
-        <h3>List of boost</h3>
-        <h4>Number of boost : <%= @task.boosts.count %> </h4>
-        <hr />
-        <% @task.boosts.each do |boost|%>
-          <div class="row">
-            <div class="col-md-2 img_profile_boost">
-              <%= image_tag(@task.user.avatar.thumb) %>
-            </div>
-            <div class="col-md-5">
-              <p>
-                by <span class="login"><%= boost.user.login.capitalize %></span>
-                <%= time_ago_in_words(boost.created_at) %>
-              </p>
-              <%= boost.content.html_safe%>
-            </div>
-          </div>
-          <hr />
+        <% if current_user == @task.user %>
+          <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger stop_timer_button", :role => "button", method: :put %>
         <% end %>
       </div>
-    </div>
+    <% else %>
+      <h1>TIME IS FINISH </h1>
+      <%= form_for(@task, url: validation_end_task_path(@task), html: {method: :put,  multipart: true}) do |f|%>
+        <div class="field row">
+          <div class="col-md-4 col-md-offset-4">
+              <span class="file-input btn btn-block btn-primary btn-file">
+                  Choose File &hellip;  <%= file_field_tag :image, :class => "file", :onchange => "readURL(this, 'img_prev');", id: "validation_image"%>
+              </span>
+              <img id="img_prev" class="img_preview" />
+          </div>
+        </div>
+        <div class="actions row">
+          <%= f.submit "Upload image", :class => "btn btn-lg btn-primary" %>
+        </div>
+      <%end%>
+    <%end%>
   </div>
+  <div class="row item_show_task list_of_boost">
+    <%= render 'task_list_boost' %>
+  </div>
+</div>
+
+<div class="col-md-2 item_show_task">
+  <div class="row ">
+    <h4>Beginnig</h4>
+    <div><%= image_tag(@task.cover_image.xxl, :class => "image_100_width") %></div>
+  </div>
+  <% if @task.state == "confirmed" %>
+    <h4>End:</h4>
+    <div class='row'>
+      <div><%= image_tag(@task.validation_image.xxl, :class => "image_100_width")  %></div>
+    </div>
+  <%end%>
 </div>
 
 
@@ -207,8 +91,6 @@
 
 
 <script type="text/javascript">
-  var clock;
-
   $(document).ready(function() {
     var clock;
     var time_in_second = <%= @task.time_before_end %>
@@ -230,6 +112,24 @@
     {
       clock.start();
     }
+
+    $(".boost_text_link").click(function(){
+      $(".boost_text_form").show();
+      $(".boost_img_form").hide();
+      $(".boost_money_form").hide();
+    });
+
+    $(".boost_img_link").click(function(){
+      $(".boost_text_form").hide();
+      $(".boost_img_form").show();
+      $(".boost_money_form").hide();
+    });
+
+    $(".boost_money_link").click(function(){
+      $(".boost_text_form").hide();
+      $(".boost_img_form").hide();
+      $(".boost_money_form").show();
+    });
 
   });
 </script>

@@ -48,7 +48,7 @@
   </nav>
 
 
-  <div class="container page_content">
+  <div class="container-fluid page_content col-md-offset-1">
     <% flash.each do |name, msg| -%>
       <%= content_tag :div, msg, class: name %>
     <% end -%>

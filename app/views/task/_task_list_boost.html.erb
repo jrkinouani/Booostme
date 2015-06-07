@@ -1,0 +1,19 @@
+
+<h3>List of boost</h3>
+<h4>Number of boost : <%= @task.boosts.count %> </h4>
+<hr />
+<% @task.boosts.order(created_at: :desc).each do |boost|%>
+  <div class="row">
+    <div class="col-md-2 img_profile_boost">
+      <%= image_tag(@task.user.avatar.thumb) %>
+    </div>
+    <div class="col-md-5">
+      <p>
+        by <span class="login"><%= boost.user.login.capitalize %></span>
+        <%= time_ago_in_words(boost.created_at) %>
+      </p>
+      <%= boost.content.html_safe%>
+    </div>
+  </div>
+  <hr />
+<% end %>
