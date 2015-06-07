@@ -16,11 +16,13 @@ describe "UserCreatePictureBoost" do
       visit task_path(task.id)
     end
 
-    it "should allow user to do an picture boost" do 
+    it "should allow user to do an picture boost" do
+      Capybara.ignore_hidden_elements = false
       attach_file "boost_image", "spec/files/booostme_400vert.png"
       click_button "send Picture"
       page.should have_content "your boost has been successfully sent"
       page.should have_content "by #{user.login}"
+      Capybara.ignore_hidden_elements = true
     end
   end
 
