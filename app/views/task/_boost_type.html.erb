@@ -1,0 +1,90 @@
+<div class="row">
+  <a href="#" role="tab" data-toggle="tab" class="col-md-4 boost_text_link" id="boost_text_link">
+    <%= image_tag("pencil.png", :class => "img_booost") %>
+    <p>Message</p>
+  </a>
+  <a href="#" role="tab" data-toggle="tab" class="col-md-4 boost_img_link" id="boost_img_link">
+    <%= image_tag("picture.png", :class => "img_booost") %>
+    <p>Photo</p>
+  </a>
+  <a href="#"  role="tab" data-toggle="tab" class="col-md-4 boost_money_link" id="boost_money_link">
+    <%= image_tag("money.png", :class => "img_booost") %>
+    <p>Money</p>
+  </a>
+</div>
+
+<div style="display:none" class="row boost_text_form">
+  <%= form_for(@boost, url: text_boost_task_path(@task), html: {method: :post}) do |f|%>
+    <%= f.hidden_field :type, :value => "TextBoost" %>
+    <div class="field">
+      <%= f.label :text %><br />
+      <%= f.text_area :text, autofocus: true, size: "24x6" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "send Boost", :class => "btn btn-lg btn-primary" %>
+    </div>
+
+  <% end %>
+</div>
+
+<div style="display:none" class="row boost_img_form">
+  <%= form_for(@boost, url: picture_boost_task_path(@task), html: {method: :post, multipart: true}) do |f|%>
+    <%= f.hidden_field :type, :value => "PictureBoost" %>
+    <br/>
+    <div class="field row">
+      <div class="col-md-8 col-md-offset-2">
+          <span class="file-input btn btn-block btn-primary btn-file">
+              Choose File &hellip;  <%= f.file_field :image, :class => "file", :onchange => "readURL(this, 'img_prev_boost');"%>
+          </span>
+          <br />
+      </div>
+      <img id="img_prev_boost" class="img_preview" />
+    </div>
+
+    <div class="actions">
+      <%= f.submit "send Picture", :class => "btn btn-lg btn-primary" %>
+    </div>
+  <%end%>
+</div>
+
+<div style="display:none" class="row boost_money_form">
+  <%= form_for(@boost, url: money_boost_task_path(@task), html: {method: :post, id: "payment-form"}) do |f|%>
+    <%= f.hidden_field :type, :value => "MoneyBoost" %>
+    <span class="payment-errors"></span>
+
+    <%= f.radio_button(:money, 100) %>
+    <%= label_tag(:one_dollar, "$1") %>
+    <%= f.radio_button(:money, 500) %>
+    <%= label_tag(:five_dollar, "$5") %>
+    <%= f.radio_button(:money, 1000) %>
+    <%= label_tag(:ten_dollar, "$10") %>
+
+    <div class="form-row">
+      <label>
+        <span>Card Number</span>
+        <input type="text" size="20" data-stripe="number" id="card_number" />
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>
+        <span>CVC</span>
+        <input type="text" size="4" data-stripe="cvc" id="cvc"/>
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>
+        <span>Expiration (MM/YYYY)</span>
+        <input type="text" size="2" data-stripe="exp-month" id="exp-month"/>
+      </label>
+      <span> / </span>
+      <input type="text" size="4" data-stripe="exp-year" id="exp-year" />
+    </div>
+
+    <div class="actions">
+      <%= f.submit "send money", :class => "btn btn-lg btn-primary" %>
+    </div>
+  <%end%>
+</div>

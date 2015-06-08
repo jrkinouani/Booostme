@@ -16,11 +16,13 @@ describe "UserCreateTextBoost" do
       visit task_path(task.id)
     end
 
-    it "should allow user to do an text boost" do 
+    it "should allow user to do an text boost" do
+      Capybara.ignore_hidden_elements = false
       fill_in "Text", :with => "hello boby keep going you can do it"
       click_button "send Boost"
       page.should have_content "your boost has been successfully sent"
       page.should have_content "by #{user.login}"
+      Capybara.ignore_hidden_elements = true
     end
   end
 
