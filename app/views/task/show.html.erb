@@ -9,8 +9,33 @@
     <p>By <%= @task.user.login %></p>
     <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
     <% if @task.time_before_end > 0 && @task.state == "to_do" %>
-
-      <div class="clock row" style="margin:2em;"></div>
+    <div class="row">
+      <div class="countdown_timer col-md-6 col-md-offset-3">
+        <script>
+          var myCountdown2 = new Countdown({
+                            time: <%= @task.time_before_end %>, 
+                            width:300, 
+                            height:80, 
+                            rangeHi:"day",  // <- no comma on last item!
+                            numbers   :   {
+                              font  : "Arial",
+                              color : "#FFFFFF",
+                              bkgd  : "#365D8B",
+                              fontSize : 200,
+                              rounded : 0.15,       // percentage of size 
+                              shadow  : {
+                                    x : 0,      // x offset (in pixels)
+                                    y : 3,      // y offset (in pixels)
+                                    s : 4,      // spread
+                                    c : "#000000",  // color
+                                    a : 0.4     // alpha  // <- no comma on last item!
+                                    }
+                              },
+                              onComplete : function(){location.reload()},
+                            });
+        </script>
+      </div>
+    </div>
       <div class="row">
         <% if current_user == @task.user %>
           <%= link_to "Stop Timer", stop_timer_task_path(@task), :class => "btn btn-lg btn-danger stop_timer_button", :role => "button", method: :put %>
@@ -92,27 +117,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var clock;
-    var time_in_second = <%= @task.time_before_end %>
-    var state = "<%= @task.state %>"
-    // var time_in_second = 10.23
-
-    clock = $('.clock').FlipClock({
-          clockFace: 'DailyCounter',
-          autoStart: false,
-          callbacks: {
-            stop: function() {
-                location.reload()
-              }
-          }
-      });
-    clock.setTime(time_in_second);
-    clock.setCountdown(true);
-    if (time_in_second > 0 && state == "to_do") 
-    {
-      clock.start();
-    }
-
     $(".boost_text_link").click(function(){
       $(".boost_text_form").show();
       $(".boost_img_form").hide();

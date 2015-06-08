@@ -1,4 +1,4 @@
-@import "flipclock";
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-datepicker";
@@ -114,9 +114,9 @@ body
 }
 
 
-.flip-clock-wrapper
+.countdown_timer
 {
-  padding-left: 4%;
+  padding-left: 32px
 }
 
 .item_show_task
