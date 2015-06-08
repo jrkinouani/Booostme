@@ -20,7 +20,10 @@
 
       <div class="field">
         <%= f.label :cover_image %><br />
-        <%= f.file_field :cover_image, autofocus: true %>
+        <span class="file-input btn btn-block btn-primary btn-file">
+          Choose File &hellip;  <%= f.file_field :cover_image, autofocus: true,:class => "file", :onchange => "readURL(this, 'img_prev_boost');" %>
+        </span>
+        <img id="img_prev_boost" class="img_preview" />
       </div>
 
       <div class="actions">
