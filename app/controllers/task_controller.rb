@@ -17,7 +17,7 @@ class TaskController < ApplicationController
   end
 
   def category
-    @tasks =  Task.where("state == ?", params[:state])
+    @tasks =  Task.where("state = ?", params[:state])
   end
 
 

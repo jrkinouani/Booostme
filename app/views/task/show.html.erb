@@ -7,33 +7,11 @@
   <div class="row item_show_task">
     <h2><%= @task.title.capitalize %></h2>
     <p>By <%= @task.user.login %></p>
-    <p>Due date <%= @task.end_date%> at <%= @task.hour %> h</p>
+    <h3><%= @task.end_date.to_formatted_s(:long_ordinal) %></h3>
     <% if @task.time_before_end > 0 && @task.state == "to_do" %>
     <div class="row">
-      <div class="countdown_timer col-md-6 col-md-offset-3">
-        <script>
-          var myCountdown2 = new Countdown({
-                            time: <%= @task.time_before_end %>, 
-                            width:300, 
-                            height:80, 
-                            rangeHi:"day",  // <- no comma on last item!
-                            numbers   :   {
-                              font  : "Arial",
-                              color : "#FFFFFF",
-                              bkgd  : "#365D8B",
-                              fontSize : 200,
-                              rounded : 0.15,       // percentage of size 
-                              shadow  : {
-                                    x : 0,      // x offset (in pixels)
-                                    y : 3,      // y offset (in pixels)
-                                    s : 4,      // spread
-                                    c : "#000000",  // color
-                                    a : 0.4     // alpha  // <- no comma on last item!
-                                    }
-                              },
-                              onComplete : function(){location.reload()},
-                            });
-        </script>
+      <div class="countdown_timer">
+        <span id="getting-started"></span>
       </div>
     </div>
       <div class="row">
@@ -76,8 +54,13 @@
   <%end%>
 </div>
 
-
 <script type="text/javascript">
+  $("#getting-started").countdown("<%= @task.end_date%>" + " <%= @task.hour %>:00", function(event) {
+    $(this).text(
+      event.strftime('%D days %H:%M:%S')
+    );
+  }).on('finish.countdown', function(){location.reload()});
+
 
   // This identifies your website in the createToken call below
   Stripe.setPublishableKey('pk_test_umZbkFDV0vblJJX97EuGm9Su');

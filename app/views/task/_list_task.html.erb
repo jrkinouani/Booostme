@@ -12,17 +12,11 @@
                 <div class="photo_profile_list">
                   <h2><%= task.title %></h2>
                   <p> Due date <%= task.end_date %></p>
-                  <div class="countdown">
-                    <p class="date" style="display:none"><%= task.end_date.strftime("%d %B %Y") + " #{task.hour}:00:00" %></p>
-                    <span class="days">00</span>
-                    <span class="timeRefDays">days</span>
-                    <span class="hours">00</span>
-                    <span class="timeRefHours">hours</span>
-                    <span class="minutes">00</span>
-                    <span class="timeRefMinutes">minutes</span>
-                    <span class="seconds">00</span>
-                    <span class="timeRefSeconds">seconds</span>
-                  </div>
+                  <% if task.state == "to_do" %>
+                    <div class="countdown_timer_small" data-countdown="<%= task.end_date %> <%= task.hour%>:00"></div>
+                  <%else%>
+                    <div class="countdown_timer_small">TIME IS FINISH</div>
+                  <%end%>
                   <p><%= link_to "View details", task_path(task), :class => "btn btn-default", :role => "button" %></p>
                 </div>
               </div>
