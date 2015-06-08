@@ -16,7 +16,7 @@ RSpec.describe "task/show.html.erb", type: :view do
   end
 
   it "display due date of the task" do 
-    rendered.should have_selector('p', :text => "Due date #{@task.end_date}")
+    rendered.should have_selector('h3', :text => "#{@task.end_date.to_formatted_s(:long_ordinal)}")
   end
 
   it "display owner og the task" do

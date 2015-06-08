@@ -1,16 +1,1 @@
 <%= render 'list_task' %>
-
-<% if params["state"] == "to_do" %>
-  <script type="text/javascript">
-    $(document).ready(function(){
-
-      $('.countdown').each(function(){
-        $(this).countdown({
-          date: $(this).find(".date").text(),
-          format: "on"
-        });
-      });
-
-    });
-  </script>
-<% end %>
