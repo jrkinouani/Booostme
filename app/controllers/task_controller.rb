@@ -4,7 +4,7 @@ class TaskController < ApplicationController
   before_action :check_user
 
   def index
-    @tasks = Task.where("state == ?", "to_do")
+    @tasks = Task.where("state = ?", "to_do")
     # @tasks = Task.all
   end
 

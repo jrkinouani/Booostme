@@ -2,13 +2,13 @@ class WelcomeController < ApplicationController
   before_action :check_time_task, :only => [:index]
 
   def index
-    @tasks = Task.where("state == ?", "to_do").last(3)
+    @tasks = Task.where("state = ?", "to_do").last(3)
   end
 
   private
 
   def check_time_task
-    @tasks = Task.where("end_date <= ? AND state == 'to_do'", DateTime.now)
+    @tasks = Task.where("end_date <= ? AND state = 'to_do'", DateTime.now)
     @tasks.each do | task|
       if task.state != "confirmed"
         if task.end_date < Date.today
