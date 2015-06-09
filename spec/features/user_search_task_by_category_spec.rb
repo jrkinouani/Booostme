@@ -14,24 +14,24 @@ describe 'UserSearchTaskByCategory' do
       @task_1 = FactoryGirl.create(:task)
       @task_2 = FactoryGirl.create(:task)
       user.tasks << @task_2
-      @task_2.transition_pending
+      @task_2.transition_finished
     end
 
-    it "allows user to search pending task" do 
-      click_link 'Pending task'
+    it "allows user to search Finished challenges" do 
+      click_link 'Finished challenges'
       page.should have_content(@task_2.title)
       page.should have_content(@task_2.end_date)
     end
 
-    it "allows user to search todo task" do 
-      click_link 'Todo task'
+    it "allows user to search Ongoing challenges" do 
+      click_link 'Ongoing challenges'
       page.should have_content(@task_1.title)
       page.should have_content(@task_1.end_date)
     end
 
-    it "allows user to search Confirmed task" do
-      @task_2.transition_confirmed
-      click_link 'Confirmed task'
+    it "allows user to search Succeeded challenges" do
+      @task_2.transition_successful
+      click_link 'Succeeded challenges'
       page.should have_content(@task_2.title)
       page.should have_content(@task_2.end_date)
     end

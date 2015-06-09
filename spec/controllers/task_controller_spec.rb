@@ -21,15 +21,15 @@ RSpec.describe TaskController, type: :controller do
 
   describe "GET #category" do
     it "populates an array of tasks" do
-      task_to_do = FactoryGirl.create(:task)
-      task_pending = FactoryGirl.create(:task)
-      task_pending.transition_pending
-      get :category, state: "pending"
-      assigns(:tasks).should eq([task_pending])
+      task_ongoing = FactoryGirl.create(:task)
+      task_finished = FactoryGirl.create(:task)
+      task_finished.transition_finished
+      get :category, state: "finished"
+      assigns(:tasks).should eq([task_finished])
     end
 
     it "rendres the :index view" do 
-      get :category, state: "pending"
+      get :category, state: "finished"
       response.should render_template :category
     end
   end
@@ -70,24 +70,24 @@ RSpec.describe TaskController, type: :controller do
       @file = fixture_file_upload('spec/files/booostme_400vert.png', 'text/png')
     end
 
-    it "change the state of the task to confirmed" do 
+    it "change the state of the task to successful" do 
       task = FactoryGirl.create(:task)
       User.first.tasks << task
       put :validation_end, id: task.id, image: @file
       task.reload
-      expect(task.state).to eql "confirmed"
+      expect(task.state).to eql "successful"
     end
   end
 
 
 
   describe "PUT #stop_timer" do
-    it "change the state of the task to pending" do
+    it "change the state of the task to finished" do
       task = FactoryGirl.create(:task)
       User.first.tasks << task
       put :stop_timer, id: task.id
       task.reload
-      expect(task.state).to eql "pending"
+      expect(task.state).to eql "finished"
     end
 
     it "rendres the :show view" do 
