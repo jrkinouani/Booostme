@@ -12,7 +12,7 @@
                 <div class="photo_profile_list">
                   <h2><%= task.title %></h2>
                   <p> Due date <%= task.end_date %></p>
-                  <% if task.state == "to_do" %>
+                  <% if task.state == "ongoing" %>
                     <div class="countdown_timer_small" data-countdown="<%= task.end_date %> <%= task.hour%>:00"></div>
                   <%else%>
                     <div class="countdown_timer_small">TIME IS FINISH</div>

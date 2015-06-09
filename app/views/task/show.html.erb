@@ -8,7 +8,7 @@
     <h2><%= @task.title.capitalize %></h2>
     <p>By <%= @task.user.login %></p>
     <h3><%= @task.end_date.to_formatted_s(:long_ordinal) %></h3>
-    <% if @task.time_before_end > 0 && @task.state == "to_do" %>
+    <% if @task.time_before_end > 0 && @task.state == "ongoing" %>
     <div class="row">
       <div class="countdown_timer">
         <span id="getting-started"></span>
@@ -46,7 +46,7 @@
     <h4>Beginnig</h4>
     <div><%= image_tag(@task.cover_image.xxl, :class => "image_100_width") %></div>
   </div>
-  <% if @task.state == "confirmed" %>
+  <% if @task.state == "successful" %>
     <h4>End:</h4>
     <div class='row'>
       <div><%= image_tag(@task.validation_image.xxl, :class => "image_100_width")  %></div>

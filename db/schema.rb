@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 20150509142529) do
     t.integer  "hour"
     t.string   "validation_image"
     t.string   "cover_image"
-    t.string   "state",            default: "to_do"
+    t.string   "state",            default: "ongoing"
     t.integer  "user_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"

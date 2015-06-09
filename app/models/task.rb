@@ -15,13 +15,13 @@ class Task < ActiveRecord::Base
     time_in_second > 0 ? time_in_second.to_i : 0
   end
 
-  def transition_pending
-    self.state = "pending"
+  def transition_finished
+    self.state = "finished"
     self.save
   end
 
-  def transition_confirmed
-    self.state = "confirmed"
+  def transition_successful
+    self.state = "successful"
     self.save
   end
 

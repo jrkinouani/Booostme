@@ -4,7 +4,7 @@ class TaskController < ApplicationController
   before_action :check_user
 
   def index
-    @tasks = Task.where("state = ?", "to_do")
+    @tasks = Task.where("state = ?", "ongoing")
     # @tasks = Task.all
   end
 
@@ -64,7 +64,7 @@ class TaskController < ApplicationController
 
   def stop_timer
     if current_user == @task.user
-      @task.transition_pending
+      @task.transition_finished
       flash[:notice] = "The task has been stop"
     else
       flash[:error] = "your not the owner of the task"
@@ -76,7 +76,7 @@ class TaskController < ApplicationController
     if current_user == @task.user && params[:image]
       @task.validation_image = params[:image]
       if @task.save
-        @task.transition_confirmed
+        @task.transition_successful
         flash[:notice] = "The task has confirmed"
       else
         flash[:error] = @task.errors.full_messages
@@ -114,11 +114,11 @@ class TaskController < ApplicationController
   def check_time_task
     @tasks = Task.where("end_date <= ?", DateTime.now)
     @tasks.each do | task|
-      if task.state != "confirmed"
+      if task.state != "successful"
         if task.end_date < Date.today
-          task.transition_pending
+          task.transition_finished
         elsif task.end_date == Date.today && task.hour < DateTime.now.hour
-          task.transition_pending
+          task.transition_finished
         end
       end
     end

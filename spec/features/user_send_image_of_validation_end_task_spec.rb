@@ -7,7 +7,7 @@ describe "UserSendImageOfValidationEndTask" do
   context "user is login" do 
     before(:each) do
       task.end_date -= 1
-      task.transition_pending
+      task.transition_finished
       user.tasks << task
       visit root_path
       click_link 'Login'
