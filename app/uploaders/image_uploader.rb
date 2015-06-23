@@ -36,6 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
 
   process :resize_to_fit => [800, 800]
+  process :right_orientation
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process :resize_to_fit => [200, 200]
@@ -57,6 +58,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg gif png)
   end
+
+
+  def right_orientation
+    manipulate! do |img|
+      img.auto_orient
+      img
+    end
+  end
+
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
