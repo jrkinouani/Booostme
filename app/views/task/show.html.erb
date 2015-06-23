@@ -21,19 +21,21 @@
       </div>
     <% else %>
       <h1>TIME IS FINISH </h1>
-      <%= form_for(@task, url: validation_end_task_path(@task), html: {method: :put,  multipart: true}) do |f|%>
-        <div class="field row">
-          <div class="col-md-4 col-md-offset-4">
-              <span class="file-input btn btn-block btn-primary btn-file">
-                  Choose File &hellip;  <%= file_field_tag :image, :class => "file", :onchange => "readURL(this, 'img_prev');", id: "validation_image"%>
-              </span>
-              <img id="img_prev" class="img_preview" />
-          </div>
-        </div>
-        <div class="actions row">
-          <%= f.submit "Upload image", :class => "btn btn-lg btn-primary" %>
-        </div>
-      <%end%>
+        <% if current_user == @task.user %>
+          <%= form_for(@task, url: validation_end_task_path(@task), html: {method: :put,  multipart: true}) do |f|%>
+            <div class="field row">
+              <div class="col-md-4 col-md-offset-4">
+                  <span class="file-input btn btn-block btn-primary btn-file">
+                      Choose File &hellip;  <%= file_field_tag :image, :class => "file", :onchange => "readURL(this, 'img_prev');", id: "validation_image"%>
+                  </span>
+                  <img id="img_prev" class="img_preview" />
+              </div>
+            </div>
+            <div class="actions row">
+              <%= f.submit "Upload image", :class => "btn btn-lg btn-primary" %>
+            </div>
+          <%end%>
+        <%end%>
     <%end%>
   </div>
   <div class="row item_show_task list_of_boost">
